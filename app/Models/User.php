@@ -18,11 +18,14 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'firstname',
-        'lastname',
+        'first_name',
+        'last_name',
         'email',
         'phone',
+        'photo',
         'password',
+        'google_id',
+        'role'
     ];
 
     /**
@@ -33,6 +36,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'google_id',
     ];
 
     /**
@@ -47,4 +51,22 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function createUser($firstname, $lastname, $email, $password, $phone, $role)
+    {
+
+//        dd($firstname, $lastname, $email, $password, $phone);
+        $created = self::create([
+            'first_name' => $firstname,
+            'last_name' => $lastname,
+            'email' => $email,
+            'password' => $password,
+            'phone' => $phone,
+            'role' => $role,
+        ]);
+
+        return $created;
+    }
+
+
 }

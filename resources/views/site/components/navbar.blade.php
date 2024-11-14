@@ -10,12 +10,22 @@
             <li><a href="" class="hover:underline font-medium">Planos</a></li>
         </ul>
     </div>
+
+
     <div class="flex flex-row gap-4 items-center">
         <a href="{{ route('auth') }}" class="hover:underline font-medium">Login</a>
         <button class="py-[5px] px-[17px] bg-blue-white rounded-[6px] font-medium active:scale-[0.97]" onclick="redirectAuthRegister()">
             Comece já
         </button>
     </div>
+
+    @if(auth()->check())
+        <div>
+            <h1>Logado</h1>
+            <a href="{{ route('logout') }}">Sair</a>
+        </div>
+    @endif
+
 </nav>
 
 <script>
