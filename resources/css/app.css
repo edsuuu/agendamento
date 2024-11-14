@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 .input-container {
     width: 100%;
     position: relative;
@@ -19,30 +18,22 @@
         border: 1px solid #0000005f;
         border-radius: 4px;
         box-sizing: border-box;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
 
         &:focus {
             outline: none;
-            border: 1px solid #0084ff;
+            border-color: #0084ff;
 
             ~ label {
-                top: -10px;
-                font-size: 1rem;
-                background: white;
+                color: #0084ff;
             }
+
         }
 
-        &:not(:placeholder-shown) ~ label,
-        &:focus ~ label {
+        ~ label {
             top: -10px;
             font-size: 0.9rem;
-
             background: white;
-        }
-
-        &:placeholder-shown ~ label {
-            top: 15px;
-            font-size: 1rem;
-            background: none;
         }
     }
 
@@ -55,7 +46,9 @@
         top: 15px;
         padding: 0 5px;
         transition: 0.2s ease all;
-        -moz-transition: 0.2s ease all;
-        -webkit-transition: 0.2s ease all;
     }
+}
+
+.error-input {
+    color: red;
 }

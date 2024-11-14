@@ -11,7 +11,6 @@ class SiteController extends Controller
 
         $plans = $this->getPlans();
 
-
         return view('site.index', compact('plans'));
     }
 

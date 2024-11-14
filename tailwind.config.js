@@ -22,7 +22,8 @@ export default {
             'blue-button': '#043873dd',
             'white-color': '#fff',
             'white-opaco': '#ECE9E9',
-            'border-gray': '#0000005f'
+            'border-gray': '#0000005f',
+            'error-message': '#EF4444'
 
         }
     },

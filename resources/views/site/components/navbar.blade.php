@@ -1,4 +1,4 @@
-<nav class="w-full border-b border-black bg-blue-black text-white flex flex-row justify-between px-10 items-center text-white-color p-4"
+<nav class="w-full border-b border-b-blue-link bg-blue-black text-white flex flex-row justify-between px-10 items-center text-white-color p-4"
      id="navbar">
     <div>
         <h2><a href="{{ route('home') }}">Logo</a></h2>
