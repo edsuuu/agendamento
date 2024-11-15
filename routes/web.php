@@ -1,10 +1,17 @@
 <?php
 
+// use Illuminate\Support\Facades\Route;
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 use App\Http\Controllers\auth\AuthController;
 use App\Http\Controllers\site\SiteController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [SiteController::class, 'index'])->name('home');
+
 
 Route::get('/segments-types/{segment_id}', [AuthController::class, 'getAllSegmentsTypeByIdTheSegment'])->name('get.segmentTypes');
 

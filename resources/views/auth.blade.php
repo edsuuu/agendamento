@@ -2,7 +2,7 @@
 @section('title', 'Autenticação')
 
 @section('content')
-    <div class="w-full h-screen flex items-center justify-center" id="content">
+    <div class="w-full h-screen flex items-center justify-center text-black" id="content">
 
         {{-- Tela azul com h1 de login / registro --}}
         <div id="informations-div" class="w-full bg-blue-black h-full flex items-center justify-center text-white transition-transform
@@ -15,7 +15,7 @@
             {{-- formulario de login--}}
             <div id="login-form" class="border border-border-gray w-[500px] rounded-[7px] p-4 flex flex-col">
                 <div class="flex flex-col justify-center mt-5 mb-5">
-                    <h1 class="text-2xl font-semibold text-center">
+                    <h1 class="text-2xl font-semibold text-center text-black">
                         Acessar painel
                     </h1>
                     <div class="flex flex-col justify-center text-error-message text-center">
@@ -44,7 +44,7 @@
 
                     <div class="flex flex-row justify-between pl-0.5 pr-0.5 my-4">
                         <div class="">
-                            <label for="remember" class="flex flex-row items-center gap-2 cursor-pointer text-[14px] ">
+                            <label for="remember" class="flex flex-row items-center gap-2 cursor-pointer text-[14px] text-black">
                                 <input type="checkbox" name="remember" id="remember">
                                 Manter conectado
                             </label>
@@ -60,7 +60,7 @@
 
                 </form>
                 <div class="flex flex-row justify-center my-4 text-[15px]">
-                    <p>
+                    <p class="text-black">
                         Não tem uma conta ? <span class="text-blue-link underline cursor-pointer" onclick="swapDivs()">Cadastre-se</span>
                     </p>
                 </div>
@@ -154,31 +154,10 @@
                         </div>
 
                         <div id="segment-container" class="w-full flex flex-col gap-2">
-                            <div id="segment-container" class="w-full flex flex-col gap-2">
-                                <label for="segment" class="text-[14px]">
-                                    Selecione seu segmento <br>
-                                    <select name="segment" id="segment" class="w-full border border-border-gray cursor-pointer outline-none rounded">
-                                        <option value="" disabled selected>Selecione um segmento</option>
-                                        @foreach($segments as $segment)
-                                            <option value="{{ $segment->id }}">{{ $segment->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </label>
-                                <span class="error-message text-error-message text-xs mt-1 pl-1" style="display: none;"></span> <!-- Espaço para a mensagem de erro -->
-                            </div>
-
-                            <div id="segmentTypeContainer" style="display: none;">
-                                <label for="segmentType" class="text-[14px]">
-                                    Selecione o tipo do seu segmento
-                                    <select name="segmentType" id="segmentType" class="w-full border border-border-gray cursor-pointer outline-none rounded">
-                                        <option value="" disabled selected>Selecione um tipo de segmento</option>
-                                    </select>
-                                </label>
-                                <span class="error-message text-error-message text-xs mt-1 pl-1" style="display: none;"></span> <!-- Espaço para a mensagem de erro -->
-                            </div>
+                            @livewire('segment-form')
                         </div>
 
-                        <button type="submit"
+                        <button type="submitå"
                                 class="bg-blue-button w-full font-bold text-white-color rounded-[5px] py-2 transition-all duration-200 active:scale-[0.98]">
                             Criar Conta
                         </button>
@@ -212,7 +191,6 @@
                     </button>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -276,31 +254,6 @@
                 setUsuarioForm();
             });
 
-            segmentSelect.addEventListener('change', function () {
-                const segmentId = this.value;
-
-                if (segmentId) {
-                    segmentTypeContainer.style.display = 'block';
-
-                    fetch('/segments-types/' + segmentId)
-                        .then(response => response.json())
-                        .then(data => {
-                            segmentTypeSelect.innerHTML = '<option value="" disabled selected>Selecione um tipo de segmento</option>';
-
-                            data.forEach(function (segmentType) {
-                                const option = document.createElement('option');
-                                option.value = segmentType.id;
-                                option.textContent = segmentType.name;
-                                segmentTypeSelect.appendChild(option);
-                            });
-                        })
-                        .catch(error => {
-                            console.error('Erro ao buscar os tipos de segmento:', error);
-                        });
-                } else {
-                    segmentTypeContainer.style.display = 'none';
-                }
-            });
         });
 
 

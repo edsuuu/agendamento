@@ -14,18 +14,17 @@ export default {
             fontFamily: {
                 sans: ['Inter', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                'blue-black': '#043873',
+                'blue-white': '#4F9CF9',
+                'blue-link': '#0084ff',
+                'blue-button': '#043873dd',
+                'white-color': '#fff',
+                'white-opaco': '#ECE9E9',
+                'border-gray': '#0000005f',
+                'error-message': '#EF4444'
+            }
         },
-        colors: {
-            'blue-black': '#043873',
-            'blue-white': '#4F9CF9',
-            'blue-link': '#0084ff',
-            'blue-button': '#043873dd',
-            'white-color': '#fff',
-            'white-opaco': '#ECE9E9',
-            'border-gray': '#0000005f',
-            'error-message': '#EF4444'
-
-        }
     },
     plugins: [],
 };
