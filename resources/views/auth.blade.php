@@ -92,8 +92,8 @@
             {{-- Formulario de cadastro --}}
             <div id="register-form" class="border border-border-gray w-[550px] rounded-[7px] p-4 hidden">
                 <div class="flex flex-col mb-3">
-                    <h1 class="text-center font-medium text-2xl my-4">Criar sua conta</h1>
-                    <div class="flex flex-row justify-around">
+                    <h1 class="text-center font-medium text-2xl my-4 text-black">Criar sua conta</h1>
+                    <div class="flex flex-row justify-around text-black">
                         <p>Cadastrar como : </p>
                         <p>
                             <span id="comercio-option" class="font-medium text-blue-black cursor-pointer hover:underline">Comercio</span>
@@ -164,7 +164,7 @@
                     </div>
                 </form>
                 <div class="flex flex-row justify-center my-3 text-[15px]">
-                    <p>
+                    <p class="text-black">
                         Já possui uma conta ? <span class="text-blue-link underline cursor-pointer" onclick="swapDivs()">Fazer Login</span>
                     </p>
                 </div>
