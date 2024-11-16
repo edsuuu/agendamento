@@ -18,7 +18,7 @@ Route::get('/segments-types/{segment_id}', [AuthController::class, 'getAllSegmen
 
 Route::prefix('auth')->group(function () {
     Route::get('/', function (){
-        return view('ejnex.auth-form.forms');
+        return view('ejnex.auth-form.index');
     });
 //    Route::view('/', 'livewire.')->name('auth');
 //    Route::get('/', AuthForms::class)->name('auth');
