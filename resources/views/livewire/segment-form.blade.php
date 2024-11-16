@@ -19,7 +19,6 @@
 
     {{--    @error('selectedSegment') <span class="text-error-message text-xs mt-1 pl-1">{{ $message }}</span> @enderror--}}
 
-
     @if($segmentTypes)
         <div id="segmentTypeContainer" class="mt-1">
             <label for="segmentType" class="text-[14px] text-black">

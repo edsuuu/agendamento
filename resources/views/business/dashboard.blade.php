@@ -1,6 +1,5 @@
-
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -13,16 +12,16 @@
 <body>
 @livewireScripts
 <div>
-    <h1 class="text-red-600">Business dashboard</h1>
     @if(auth()->check())
         <div>
-            <h1 >Logado</h1>
+            <h1>Logado</h1>
             <a href="{{ route('logout') }}">Sair</a>
         </div>
     @endif
 
-    @livewire('auth-forms')
+    <h1 class="text-red-600">Business dashboard</h1>
 
+{{--    @livewire('auth-forms')--}}
 </div>
 </body>
 </html>

@@ -6,11 +6,11 @@ use Livewire\Component;
 
 class AuthForms extends Component
 {
-    public $swapPositions = false;
+    public $swapForms = false;
 
     public function togglePositions()
     {
-        $this->swapPositions = !$this->swapPositions;
+        $this->swapForms = !$this->swapForms;
     }
 
     public function render()

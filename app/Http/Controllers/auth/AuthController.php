@@ -20,7 +20,7 @@ class AuthController extends Controller
     private readonly User $userModel;
 
     private readonly string $costumerRole;
-    private readonly string $adminRole;
+    // private readonly string $adminRole;
     private readonly string $userRole;
 
     public function __construct(Business $businessModel, User $userModel)
@@ -28,7 +28,7 @@ class AuthController extends Controller
         $this->businessModel = $businessModel;
         $this->userModel = $userModel;
 
-        $this->adminRole = 'admin';
+       // $this->adminRole = 'admin';
         $this->costumerRole = 'costumer';
         $this->userRole = 'user';
     }

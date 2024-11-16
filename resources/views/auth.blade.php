@@ -19,7 +19,7 @@
                         Acessar painel
                     </h1>
                     <div class="flex flex-col justify-center text-error-message text-center">
-                        @if(session('erro'))
+                        @if( session('erro') )
                             <div class="alert alert-error">
                                 {{ session('erro') }}
                             </div>
@@ -27,15 +27,14 @@
                     </div>
                 </div>
 
-                <form id="login-form-id" action="{{ route('login') }}" method="post" class="flex flex-col justify-between">
+                <form id="login-form-id" action="{{ route('login') }}" method="post"
+                      class="flex flex-col justify-between">
                     @csrf
                     <div class="flex flex-col gap-7 ">
                         <div class="input-container">
                             <input type="email" name="email" placeholder="email@email.com">
                             <label for="email">E-mail</label>
                         </div>
-
-
                         <div class="input-container">
                             <input type="password" name="password" id="lpasswd" placeholder="********">
                             <label for="password">Senha</label>
@@ -44,7 +43,8 @@
 
                     <div class="flex flex-row justify-between pl-0.5 pr-0.5 my-4">
                         <div class="">
-                            <label for="remember" class="flex flex-row items-center gap-2 cursor-pointer text-[14px] text-black">
+                            <label for="remember"
+                                   class="flex flex-row items-center gap-2 cursor-pointer text-[14px] text-black">
                                 <input type="checkbox" name="remember" id="remember">
                                 Manter conectado
                             </label>
@@ -96,19 +96,21 @@
                     <div class="flex flex-row justify-around text-black">
                         <p>Cadastrar como : </p>
                         <p>
-                            <span id="comercio-option" class="font-medium text-blue-black cursor-pointer hover:underline">Comercio</span>
+                            <span id="comercio-option"
+                                  class="font-medium text-blue-black cursor-pointer hover:underline">Comercio</span>
                             |
-                            <span id="usuario-option" class="font-medium text-blue-black cursor-pointer hover:underline">Usuário</span>
+                            <span id="usuario-option"
+                                  class="font-medium text-blue-black cursor-pointer hover:underline">Usuário</span>
                         </p>
                     </div>
 
-                   <div class="flex flex-col justify-center text-error-message text-center">
-                       @if ($errors->any())
-                           @foreach ($errors->all() as $error)
-                               {{ $error }}
-                           @endforeach
-                       @endif
-                   </div>
+                    <div class="flex flex-col justify-center text-error-message text-center">
+                        @if ($errors->any())
+                            @foreach ($errors->all() as $error)
+                                {{ $error }}
+                            @endforeach
+                        @endif
+                    </div>
                 </div>
 
 
@@ -144,11 +146,13 @@
                         </div>
 
                         <div class="input-container">
-                            <input type="password" name="password" id="password-register" placeholder="********" maxlength="50">
+                            <input type="password" name="password" id="password-register" placeholder="********"
+                                   maxlength="50">
                             <label for="password">Senha *</label>
                         </div>
                         <div class="input-container">
-                            <input type="password" name="password_confirmation" id="check-passoword-register" placeholder="********"
+                            <input type="password" name="password_confirmation" id="check-passoword-register"
+                                   placeholder="********"
                                    maxlength="50">
                             <label for="password_confirmation">Confirmar senha</label>
                         </div>
@@ -165,7 +169,8 @@
                 </form>
                 <div class="flex flex-row justify-center my-3 text-[15px]">
                     <p class="text-black">
-                        Já possui uma conta ? <span class="text-blue-link underline cursor-pointer" onclick="swapDivs()">Fazer Login</span>
+                        Já possui uma conta ? <span class="text-blue-link underline cursor-pointer"
+                                                    onclick="swapDivs()">Fazer Login</span>
                     </p>
                 </div>
                 <div class="flex flex-row justify-center">
@@ -370,7 +375,6 @@
             } else {
                 clearError(passwordConfirmation);
             }
-
 
 
             if (isBusiness) {
