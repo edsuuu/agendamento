@@ -21,7 +21,7 @@
 
     <h1 class="text-red-600">Business dashboard</h1>
 
-{{--    @livewire('auth-forms')--}}
+    @livewire('auth-forms')
 </div>
 </body>
 </html>

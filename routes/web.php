@@ -17,7 +17,10 @@ Route::get('/', [SiteController::class, 'index'])->name('home');
 Route::get('/segments-types/{segment_id}', [AuthController::class, 'getAllSegmentsTypeByIdTheSegment'])->name('get.segmentTypes');
 
 Route::prefix('auth')->group(function () {
-    Route::get('/', [AuthController::class, 'index'])->name('auth');
+    Route::get('/', function (){
+        return view('ejnex.auth-form.forms');
+    });
+//    Route::view('/', 'livewire.')->name('auth');
 //    Route::get('/', AuthForms::class)->name('auth');
     Route::post('/login', [AuthController::class, 'loginForm'])->name('login');
     Route::post('/register-business', [AuthController::class, 'registerBusiness'])->name('business.register');
