@@ -23,6 +23,7 @@ class User extends Authenticatable
         'email',
         'phone',
         'photo',
+        'email_verified_at',
         'password',
         'google_id',
         'role'
@@ -47,7 +48,6 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
@@ -66,6 +66,11 @@ class User extends Authenticatable
         ]);
 
         return $created;
+    }
+
+    public function business()
+    {
+        return $this->hasOne(Business::class, 'id_user', 'id');
     }
 
 

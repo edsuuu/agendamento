@@ -1,8 +1,9 @@
-{{--@extends('site.layout.layout')--}}
-@extends('site.layout.layout')
-@section('title', 'Lading')
-@section('content')
+{{--@extends('navbar.layout.layout')--}}
+@extends('layout.app')
 
+@section('title', 'EJNex')
+@include('layout.navbar.navbar-site')
+@section('content')
     {{--  Header --}}
     <div class="bg-blue-black h-screen" id="content">
         <div class="flex flex-row justify-around text-white-color">

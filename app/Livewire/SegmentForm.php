@@ -11,12 +11,12 @@ class SegmentForm extends Component
     public $segments = [];
     public $segmentTypes = [];
     public $selectedSegment = null;
-    public function mount()
+    public function mount(): void
     {
         $this->segments = Segments::all();
     }
 
-    public function update()
+    public function update(): void
     {
         if ($this->selectedSegment) {
             $this->segmentTypes = SegmentTypes::where('id_segments', $this->selectedSegment)->get();

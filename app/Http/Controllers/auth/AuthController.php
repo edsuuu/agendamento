@@ -12,7 +12,9 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 use PHPUnit\TextUI\Application;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -33,18 +35,68 @@ class AuthController extends Controller
         $this->userRole = 'user';
     }
 
-    public function index()
+    public function googleAuth(Request $request)
     {
-        $segments = Segments::select('id', 'name')->get();
+        session(['business' => $request->get('business')]);
 
-        return view('auth', compact('segments'));
+        if (Auth::check()) {
+            $user = Auth::user();
+            return redirect($this->redirectBasedOnRole($user));
+        }
+
+        return Socialite::driver('google')->redirect();
     }
 
-    public function getAllSegmentsTypeByIdTheSegment($segment_id)
+    public function googleCallback(Request $request)
     {
-        $segmentsTypes = SegmentTypes::where('id_segments', $segment_id)->get();
+        try {
 
-        return response()->json($segmentsTypes);
+            $business = session('business');
+
+            $googleUser = Socialite::driver('google')->stateless()->user();
+
+//            dd($googleUser);
+
+            $user = $this->userModel::where('email', $googleUser->getEmail())->first();
+
+            if(!$user){
+                $user = $this->userModel::create([
+                    'first_name' => $googleUser->user['given_name'],
+                    'last_name' => $googleUser->user['family_name'] ?? null,
+                    'email' => $googleUser->user['email'],
+                    'google_id' => $googleUser->user['id'],
+                    'photo' => $googleUser->user['picture'],
+                    'email_verified_at' => now(),
+                    'password' => Hash::make(Str::random(16)),
+                    'role' => $business ? $this->costumerRole : $this->userRole,
+                ]);
+
+            } else {
+                $user->update([
+                    'google_id' => $googleUser->user['id'],
+                    'photo' => $googleUser->user['picture'],
+                    'email_verified_at' => now(),
+                ]);
+            }
+
+            Auth::login($user, 'on');
+
+            if($user->role === $this->costumerRole){
+                $businessId = $this->businessModel::where('id_user', $user->id)->value('id');
+//                dd($businessId);
+                if($businessId){
+                    return redirect($this->redirectBasedOnRole($user));
+                } else {
+                    return redirect()->route('business.complete-profile.google');
+                }
+            }
+
+
+            return redirect($this->redirectBasedOnRole($user));
+//            dd($googleUser);
+        } catch (\Laravel\Socialite\Two\InvalidStateException $e) {
+            dd($e->getMessage());
+        }
     }
 
     public function loginForm(Request $request)
@@ -66,7 +118,7 @@ class AuthController extends Controller
         $user = User::where('email', $credentials['email'])->first();
 
         if (!$user) {
-            $message = 'conta não encontrada.';
+            $message = 'Conta não encontrada.';
             return back()->with('erro', $message);
         }
 

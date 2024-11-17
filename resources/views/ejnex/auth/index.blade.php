@@ -1,6 +1,6 @@
-@extends('site.layout.layout')
+@extends('layout.app')
 @section('title', 'Autenticação')
-
+@include('layout.navbar.navbar-site')
 @section('content')
     <div class="w-full h-screen flex items-center justify-center text-black" id="content">
 
@@ -12,6 +12,7 @@
 
         <div id="blue-div" class="w-full flex items-center justify-center text-white transition-transform
             duration-700">
+
             {{-- formulario de login--}}
             <div id="login-form" class="border border-border-gray w-[500px] rounded-[7px] p-4 flex flex-col">
                 <div class="flex flex-col justify-center mt-5 mb-5">
@@ -26,7 +27,6 @@
                         @endif
                     </div>
                 </div>
-
                 <form id="login-form-id" action="{{ route('login') }}" method="post"
                       class="flex flex-col justify-between">
                     @csrf
@@ -67,7 +67,9 @@
                 <div class="flex flex-row justify-center">
                     <button class="flex items-center justify-center bg-white border border-[#747775] rounded-[20px] px-3 py-2
                     text-[#1f1f1f] text-sm font-roboto cursor-pointer transition-all duration-200 hover:bg-[#f6f6f6]
-                    hover:border-[#747775] active:scale-[0.97] max-w-[400px] min-w-[min-content]">
+                    hover:border-[#747775] active:scale-[0.97] max-w-[400px] min-w-[min-content]"
+                            onclick="activeSpinnerAndRedirectLogin()"
+                    >
                         <div class="flex items-center">
                             <div class="mr-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="w-[20px] h-[20px]">
@@ -82,7 +84,10 @@
                                     <path fill="none" d="M0 0h48v48H0z"/>
                                 </svg>
                             </div>
-                            <span class="text-sm text-[#1f1f1f]">Fazer login com o Google</span>
+                            <span class="text-sm text-[#1f1f1f] flex flex-row gap-2 items-center">
+                                Fazer login com o Google <span class="hidden" id="spinner-login">@include('components.spinner-google')
+                                </span>
+                            </span>
                         </div>
                     </button>
                 </div>
@@ -93,17 +98,6 @@
             <div id="register-form" class="border border-border-gray w-[550px] rounded-[7px] p-4 hidden">
                 <div class="flex flex-col mb-3">
                     <h1 class="text-center font-medium text-2xl my-4 text-black">Criar sua conta</h1>
-                    <div class="flex flex-row justify-around text-black">
-                        <p>Cadastrar como : </p>
-                        <p>
-                            <span id="comercio-option"
-                                  class="font-medium text-blue-black cursor-pointer hover:underline">Comercio</span>
-                            |
-                            <span id="usuario-option"
-                                  class="font-medium text-blue-black cursor-pointer hover:underline">Usuário</span>
-                        </p>
-                    </div>
-
                     <div class="flex flex-col justify-center text-error-message text-center">
                         @if ($errors->any())
                             @foreach ($errors->all() as $error)
@@ -126,7 +120,7 @@
                             </div>
                             <div class="input-container">
                                 <input type="text" name="lastname" id="lastname" placeholder="Seu sobrenome">
-                                <label for="lastname">Sobrenome *</label>
+                                <label for="lastname">Sobrenome </label>
                             </div>
                         </div>
 
@@ -161,7 +155,7 @@
                             @livewire('segment-form')
                         </div>
 
-                        <button type="submitå"
+                        <button type="submit"
                                 class="bg-blue-button w-full font-bold text-white-color rounded-[5px] py-2 transition-all duration-200 active:scale-[0.98]">
                             Criar Conta
                         </button>
@@ -176,7 +170,9 @@
                 <div class="flex flex-row justify-center">
                     <button class="flex items-center justify-center bg-white border border-[#747775] rounded-[20px] px-3 py-2
                     text-[#1f1f1f] text-sm font-roboto cursor-pointer transition-all duration-200 hover:bg-[#f6f6f6]
-                    hover:border-[#747775] active:scale-[0.97] max-w-[400px] min-w-[min-content]">
+                    hover:border-[#747775] active:scale-[0.97] max-w-[400px] min-w-[min-content]"
+                            onclick="activeSpinnerAndRedirect()"
+                    >
                         <div class="flex items-center">
                             <div class="mr-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="w-[20px] h-[20px]">
@@ -191,7 +187,9 @@
                                     <path fill="none" d="M0 0h48v48H0z"/>
                                 </svg>
                             </div>
-                            <span class="text-sm text-[#1f1f1f]">Criar sua conta com o Google</span>
+                            <span class="text-sm text-[#1f1f1f] flex flex-row gap-2 items-center">
+                                Criar sua conta com o Google <span class="hidden" id="spinner">@include('components.spinner-google')</span>
+                            </span>
                         </div>
                     </button>
                 </div>
@@ -200,6 +198,20 @@
     </div>
 
     <script>
+
+        function activeSpinnerAndRedirect() {
+            document.getElementById('spinner').classList.remove('hidden');
+
+            window.location = '{{ route('google', ['business' => 'true']) }}';
+        }
+
+        function activeSpinnerAndRedirectLogin() {
+            document.getElementById('spinner-login').classList.remove('hidden');
+
+            window.location = '{{ route('google')}}';
+        }
+
+
         //calculo com a div do navbar
         window.addEventListener('load', function () {
             const navbar = document.getElementById('navbar');
@@ -212,55 +224,7 @@
             content.style.height = `${adjustedHeight}px`;
         });
 
-        let currentType = 'comercio';
-
         // troca de comercio para usuario
-        document.addEventListener('DOMContentLoaded', function () {
-            const comercioOption = document.getElementById('comercio-option');
-            const usuarioOption = document.getElementById('usuario-option');
-            const registerForm = document.getElementById('register-costumer-form-id');
-            const businessNameContainer = document.getElementById('business-name-container');
-            const segmentContainer = document.getElementById('segment-container');
-            const segmentTypeContainer = document.getElementById('segmentTypeContainer');
-            const segmentSelect = document.getElementById('segment');
-            const segmentTypeSelect = document.getElementById('segmentType');
-
-            function setComercioForm() {
-                registerForm.action = '{{ route('business.register') }}';
-                businessNameContainer.style.display = 'block';
-                segmentContainer.style.display = 'block';
-                segmentTypeContainer.style.display = 'none';
-                segmentTypeSelect.innerHTML = '<option value="" disabled selected>Selecione um tipo de segmento</option>';
-                currentType = 'comercio';
-
-                comercioOption.classList.add('underline');
-                usuarioOption.classList.remove('underline');
-            }
-
-            function setUsuarioForm() {
-                registerForm.action = '{{ route('user.register') }}';
-                businessNameContainer.style.display = 'none';
-                segmentContainer.style.display = 'none';
-                segmentTypeContainer.style.display = 'none';
-                segmentTypeSelect.innerHTML = '<option value="" disabled selected>Selecione um tipo de segmento</option>';
-                currentType = 'usuario';
-
-                comercioOption.classList.remove('underline');
-                usuarioOption.classList.add('underline');
-            }
-
-            setComercioForm();
-
-            comercioOption.addEventListener('click', function () {
-                setComercioForm();
-            });
-
-            usuarioOption.addEventListener('click', function () {
-                setUsuarioForm();
-            });
-
-        });
-
 
         document.getElementById('phone').addEventListener('input', function (event) {
             let phone = event.target.value;
@@ -305,7 +269,7 @@
                     errorMessage.style.display = 'block';
                 } else {
                     const newErrorMessage = document.createElement('span');
-                    newErrorMessage.classList.add('text-error-message', 'text-xs', 'mt-1', 'error-message', 'pl-1');
+                    newErrorMessage.classList.add('text-error-message', 'text-xs', 'mt-0', 'error-message', 'pl-1');
                     newErrorMessage.textContent = message;
                     inputContainer.appendChild(newErrorMessage);
                 }
@@ -319,8 +283,6 @@
                     errorMessage.remove();
                 }
             }
-
-            let isBusiness = currentType === 'comercio';
 
             if (firstname.value.trim() === '') {
                 showError(firstname, 'O nome é obrigatório.');
@@ -344,7 +306,7 @@
                 clearError(email);
             }
 
-            if (isBusiness && businessname && businessname.value.trim() === '') {
+            if (businessname.value.trim() === '') {
                 showError(businessname, 'O nome do comércio é obrigatório.');
                 isValid = false;
             } else {
@@ -376,21 +338,18 @@
                 clearError(passwordConfirmation);
             }
 
+            if (segment.value === '') {
+                showError(segment, 'Por favor, selecione um segmento.');
+                isValid = false;
+            } else {
+                clearError(segment);
+            }
 
-            if (isBusiness) {
-                if (segment.value === '') {
-                    showError(segment, 'Por favor, selecione um segmento.');
-                    isValid = false;
-                } else {
-                    clearError(segment);
-                }
-
-                if (segmentType.value === '') {
-                    showError(segmentType, 'Por favor, selecione um tipo de segmento.');
-                    isValid = false;
-                } else {
-                    clearError(segmentType);
-                }
+            if (segmentType.value === '') {
+                showError(segmentType, 'Por favor, selecione um tipo de segmento.');
+                isValid = false;
+            } else {
+                clearError(segmentType);
             }
 
             if (isValid) {
@@ -526,15 +485,17 @@
             email.addEventListener('input', removeErrorOnInput);
             password.addEventListener('input', removeErrorOnInput);
 
-
             const form = document.getElementById('register-costumer-form-id');
             form.querySelectorAll('input').forEach(input => {
                 input.addEventListener('input', removeErrorOnInput);
             });
 
-            form.querySelector('select[name="segment"]').addEventListener('input', removeErrorOnInput);
-            form.querySelector('select[name="segmentType"]').addEventListener('input', removeErrorOnInput);
         });
 
     </script>
 @endsection
+
+
+
+
+
