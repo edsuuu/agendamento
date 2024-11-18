@@ -18,6 +18,7 @@ Route::prefix('auth')->group(function () {
 	Route::post('/register-business', [AuthController::class, 'registerBusiness'])->name('business.register');
 	Route::post('/register-user', [AuthController::class, 'registerUser'])->name('user.register');
 	Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+	Route::get('/delete-user', [AuthController::class, 'deleteUserInCompletedDataUserByGoogle'])->name('user.deleteUser');
 });
 
 Route::prefix('business')->middleware(['auth', CheckRoleUser::class . ':costumer'])->group

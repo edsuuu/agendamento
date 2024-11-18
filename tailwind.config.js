@@ -19,9 +19,11 @@ export default {
                 'blue-white': '#4F9CF9',
                 'blue-link': '#0084ff',
                 'blue-button': '#043873dd',
+                'blue-hovers': '#0f6bff',
                 'white-color': '#fff',
                 'white-opaco': '#ECE9E9',
                 'border-gray': '#0000005f',
+                'gray-text':'#8795ae',
                 'error-message': '#EF4444'
             }
         },

@@ -270,7 +270,29 @@ class AuthController extends Controller
     }
 
 
-    public function loginGoogle()
+    public function deleteUserInCompletedDataUserByGoogle(Request $request)
     {
+	    $cookie = null;
+	    
+	    if (Auth::check()) {
+		    $idUser = auth()->user()->id;
+		    
+		    $deleted = $this->userModel->where('id', $idUser)->delete();
+		    
+		    if ($deleted) {
+			    Auth::logout();
+			    
+			    $request->session()->invalidate();
+			    $request->session()->regenerateToken();
+			    
+			    $cookie = cookie('remember_token', '', -1);
+		    }
+	    }
+	    
+	    if ($cookie) {
+		    return redirect('auth')->withCookie($cookie);
+	    }
+	    
+	    return redirect('auth');
     }
 }

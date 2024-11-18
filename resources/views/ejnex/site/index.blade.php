@@ -4,135 +4,144 @@
 @section('title', 'EJNex')
 @include('layout.navbar.navbar-site')
 @section('content')
-    {{--  Header --}}
-    <div class="bg-blue-black h-screen" id="content">
-        <div class="flex flex-row justify-around text-white-color">
-            <div>
-                <h1>
-                    Sistema de Agendamento Completo
-                </h1>
-                <p>
-                    Tenha o controle de todo seu negocio direto do seu celular ou computador,
-                    com poucos cliques seus clientes estaram agendados.
-                </p>
+	{{--  Header --}}
+	<div class="bg-blue-black h-screen flex flex-row justify-around items-center " id="content">
+		<div class="flex flex-col w-[600px] text-white mb-[5rem] gap-10 items-center">
+			<h1 class="font-bold text-5xl">
+				Sistema de Agendamento Completo
+			</h1>
+			<p class="text-[17px]">
+				Tenha o controle de todo seu negocio direto do seu celular ou computador,
+				com poucos cliques seus clientes estaram agendados.
+			</p>
+			
+			<button class="py-[8px] px-[25px] bg-blue-white rounded-[6px] font-medium active:scale-[0.97]">
+				Teste Gratuitamente
+			</button>
+		</div>
+		
+		
+		<div>
+			<img src="{{ asset('images/cell.png') }}" alt="cell">
+		</div>
+	</div>
+	
+	{{--  Cards de informações  --}}
+	
+	<div class="h-2/3 flex flex-row ">
+		<div class="border border-black w-full flex flex-row gap-6 justify-center
+		items-center">
+			<div class="flex flex-col gap-6 mt-6">
+				<div class="w-48 h-48 border border-black rounded-2xl p-4">
+					Card1
+				</div>
+				<div class="w-48 h-48 border border-black rounded-2xl p-4">
+					Card2
+				</div>
+			</div>
+			<div class="flex flex-col gap-6">
+				<div class="w-48 h-48 border border-black rounded-2xl p-4">
+					Card3
+				</div>
+				<div class="w-48 h-48 border border-black rounded-2xl p-4">
+					Card4
+				</div>
+			</div>
+		</div>
+		<div class="w-full flex flex-col justify-center items-center ">
+			<div class="w-[500px] flex flex-col gap-5 items-center">
+				<h1 class="font-bold text-5xl">
+					Você no controle com poucos cliques
+				</h1>
+				<p class="text-[17px]">
+					Invista em um ambiente personalizado para seu negócio.
+				</p>
+				
+				<button class="py-[8px] px-[25px] bg-blue-white rounded-[6px] font-medium active:scale-[0.97] text-white">
+					Veja mais...
+				</button>
+			</div>
+		</div>
+	</div>
+	
+	{{--    mais uma section --}}
+	
+	<div class="h-2/3 bg-blue-black">
+		<h1 class="text-white">mais uma section</h1>
+	</div>
+	
+	{{--    Planos --}}
+	<div class="border bg-white-opaco h-4/5">
+		<div class="w-full max-w-[1440px] mx-auto">
+			<div class="flex flex-row justify-center">
+				<h1 class="text-2xl font-medium">Nossos planos</h1>
+			</div>
+			
+			<div class="border m-auto w-full">
+				<div class="border border-black flex flex-row justify-center items-center gap-4">
+					<div class="border border-black rounded-[20px] p-1">
+						<button>Mensal</button>
+						<button>Anual</button>
+					</div>
+				</div>
+				
+				<div class="border border-gray-300 rounded-[10px] bg-white p-4 flex flex-col gap-4 w-[300px]">
+					<div class="text-center">
+						<h1 class="font-bold text-3xl">Basico</h1>
+					</div>
+					<div class="text-center">
+						<p>Saia do caderninho ou planilha e venha para o novo mundo digital</p>
+					</div>
+					<div class="flex flex-col gap-2 ">
+								<span class="flex flex-row gap-2 px-3">
+									<p>R$</p>
+									<span class="flex flex-row">
+										<p class="font-bold text-4xl">32</p>
+										<p>,99</p>
+									</span>
+								</span>
+						<small class="text-gray-text text-center">R$ 1999,00 ao ano em até 12x no cartão</small>
+					</div>
+					
+					<ul>
+						<li>Beneficio 1</li>
+						<li>Beneficio 2</li>
+						<li>Beneficio 3</li>
+						<li>Beneficio 4</li>
+					</ul>
+					
+					<div class="bg-[#f6f9ff] text-blue-link flex flex-row gap-3 justify-between items-center p-2.5 rounded-[6px]">
+						<div>
+							<img src=" {{ asset('images/card-icon.svg') }}" alt="card" class="w-9">
+						</div>
+						<p class="text-[12px]">Teste grátis por 15 dias sem cadastro de cartão de credito antecipado.</p>
+					</div>
+					
+					<button class="border border-blue-hovers text-blue-hovers font-medium py-2 rounded-2xl
+							hover:bg-blue-hovers hover:text-white transition-all duration-300 ease-in-out">Começar
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	{{-- Fotter --}}
+	
+	<footer class="h-2/3 bg-blue-black">
+		<h1>Footer</h1>
+	</footer>
 
-                <button>
-                    Teste Gratuitamente
-                </button>
-            </div>
-            <div>
-                <img src="{{ asset('images/cell.png') }}" alt="cell">
-            </div>
-        </div>
-    </div>
-
-    {{--  Cards de informações  --}}
-
-    <div>
-        <div>
-            <div>Card1</div>
-            <div>Card2</div>
-            <div>Card3</div>
-            <div>Card4</div>
-        </div>
-        <div>
-            <h1>Você no controle com poucos cliques</h1>
-            <p>Invista em um ambiente personalizado para seu negócio.</p>
-
-            <button>Veja mais...</button>
-        </div>
-    </div>
-
-    {{--    mais uma section --}}
-    <div class="border bg-white-opaco">
-        <div class="w-full max-w-[1440px] mx-auto">
-            <div class="flex flex-row justify-center">
-                <h1 class="text-2xl font-medium">Nossos planos</h1>
-            </div>
-
-            <div>
-                {{-- Botões para trocar o preço --}}
-                <div class="flex flex-row justify-between items-center p-4">
-                    <div>
-                        <h1 class="text-2xl font-medium">Escolha o plano ideal para você</h1>
-                    </div>
-                    <div class="bg-blue-white p-1 rounded-[25px]">
-                        <div class="transition-transform duration-300 ease-in-out absolute inset-0 bg-blue-black rounded-[20px] transform
-                         scale-0"></div>
-                        <button
-                            class="price-toggle rounded-[20px] px-6 py-1.5 bg-blue-black text-white-color transition-all duration-300
-                            ease-in-out"
-                            data-price-type="monthly">Mensal
-                        </button>
-                        <button class="price-toggle rounded-[20px] px-6 py-1.5 text-white-color transition-all duration-300 ease-in-out"
-                                data-price-type="semiannual">Semestral
-                        </button>
-                        <button class="price-toggle rounded-[20px] px-6 py-1.5 text-white-color transition-all duration-300 ease-in-out"
-                                data-price-type="annual">Anual
-                        </button>
-                    </div>
-                </div>
-
-                {{-- Grid com todos os cards / planos --}}
-                {{-- borda aqui nos cards--}}
-                <div class="border m-auto w-full">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        @foreach ($plans as $plan)
-                            <x-site.card-plans :title="$plan['title']" :prices="$plan['prices']" :description="$plan['description']"/>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- Fotter --}}
-
-    <footer>
-        <h1>Footer</h1>
-    </footer>
-
-
-    <script>
-        // funcao para o primeiro container dps do nav para ajudar automaticamente
-        window.addEventListener('load', function () {
-            const navbar = document.getElementById('navbar');
-            const content = document.getElementById('content');
-            const navbarHeight = navbar.offsetHeight;
-
-            const screenHeight = window.innerHeight;
-            const adjustedHeight = screenHeight - navbarHeight;
-
-            content.style.height = `${adjustedHeight}px`;
-        });
-
-
-        // funcao para poder mudar o preco dos cardss
-        let selectedPriceType = 'monthly';
-
-        const priceButtons = document.querySelectorAll('.price-toggle');
-        const planElements = document.querySelectorAll('.card-plan');
-
-        priceButtons.forEach(button => {
-            button.addEventListener('click', function () {
-                selectedPriceType = this.getAttribute('data-price-type');
-
-                priceButtons.forEach((btn) => {
-                    btn.classList.remove('bg-blue-black');
-                    btn.classList.add('bg-blue-white');
-                });
-
-                // Aplica estilo no botão clicado
-                this.classList.add('bg-blue-black');
-                this.classList.remove('bg-blue-white');
-
-                planElements.forEach(planElement => {
-                    const priceElement = planElement.querySelector('.price');
-                    const prices = JSON.parse(planElement.getAttribute('data-prices'));
-
-                    priceElement.innerText = `R$ ${prices[selectedPriceType].toFixed(2).replace('.', ',')}`;
-                });
-            });
-        });
-    </script>
 @endsection
+<script>
+    window.addEventListener('load', function () {
+        const navbar = document.getElementById('navbar');
+        const content = document.getElementById('content');
+        const navbarHeight = navbar.offsetHeight;
+
+        const screenHeight = window.innerHeight;
+        const adjustedHeight = screenHeight - navbarHeight;
+
+        content.style.height = `${adjustedHeight}px`;
+    });
+
+</script>
