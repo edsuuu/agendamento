@@ -101,55 +101,7 @@ class AuthController extends Controller
         }
     }
 
-    public function loginForm(Request $request)
-    {
-        if (Auth::check()) {
-            $user = Auth::user();
-            return redirect($this->redirectBasedOnRole($user));
-        }
 
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ], [
-            'email.required' => 'O campo email é obrigatório.',
-            'email.email' => 'O email é inválido.',
-            'password.required' => 'O campo senha é obrigatório.',
-        ]);
-
-        $user = User::where('email', $credentials['email'])->first();
-
-        if (!$user) {
-            $message = 'Conta não encontrada.';
-            return back()->with('erro', $message);
-        }
-
-        if(Hash::check($credentials['password'], $user->password)) {
-            $message = 'Senha invalida';
-            return back()->with('erro', $message);
-        }
-
-//        dd($request->remember); retorna  "on"
-
-        Auth::login($user, $request->remember);
-
-        $request->session()->regenerate();
-
-        return redirect($this->redirectBasedOnRole($user));
-    }
-
-    private function redirectBasedOnRole($user)
-    {
-        if ($user->role === 'admin') {
-            return route('admin.dashboard');
-        } elseif ($user->role === 'costumer') {
-            return route('business.dashboard');
-        } elseif ($user->role === 'user') {
-            return route('client.dashboard');
-        }
-
-        return route('home');
-    }
 
     public function registerBusiness(Request $request)
     {

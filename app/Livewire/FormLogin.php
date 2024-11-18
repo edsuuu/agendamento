@@ -2,6 +2,9 @@
 
 namespace App\Livewire;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 
 class FormLogin extends Component
@@ -12,12 +15,13 @@ class FormLogin extends Component
 		'remember' => false,
 	];
 	
-	public function handleChange($field)
+	public function handleChange($field): void
 	{
 		$this->resetErrorBag($field);
 	}
 	
-	public function submit(){
+	public function submit()
+	{
 		$this->validate([
 			'formData.email' => 'required|email',
 			'formData.password' => 'required',
@@ -27,19 +31,52 @@ class FormLogin extends Component
 			'formData.password.required' => 'Por favor, informe sua senha',
 		]);
 		
+		if (Auth::check()) {
+			$user = Auth::user();
+			return redirect($this->redirectBasedOnRole($user));
+		}
+		
 		$remember = (bool)$this->formData['remember'];
 		
-		dd($remember);
-		
 		try {
-		
-		}catch (\Exception $e){
-			dd($e->getMessage());
+			
+			$user = User::where('email', $this->formData['email'])->first();
+			
+			if (!$user) {
+				return $this->addError('formData.email', 'Conta não encontrada.');
+			}
+			
+			
+			if (!Hash::check($this->formData['password'], $user->password)) {
+				return $this->addError('formData.password', 'Senha inválida.');
+			}
+			
+			Auth::login($user, $remember);
+			
+			session()->regenerate();
+			
+			return redirect($this->redirectBasedOnRole($user));
+			
+		} catch (\Exception $e) {
+			$this->addError('formData', 'Ocorreu um erro ao tentar fazer login. Tente novamente.');
 		}
 	}
 	
-    public function render()
-    {
-        return view('livewire.form-login');
-    }
+	private function redirectBasedOnRole($user): string
+	{
+		if ($user->role === 'admin') {
+			return route('admin.dashboard');
+		} elseif ($user->role === 'costumer') {
+			return route('business.dashboard');
+		} elseif ($user->role === 'user') {
+			return route('client.dashboard');
+		}
+		
+		return route('home');
+	}
+	
+	public function render()
+	{
+		return view('livewire.form-login');
+	}
 }
