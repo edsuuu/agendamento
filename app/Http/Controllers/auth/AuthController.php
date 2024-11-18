@@ -35,7 +35,19 @@ class AuthController extends Controller
         $this->costumerRole = 'costumer';
         $this->userRole = 'user';
     }
-
+	
+	private function redirectBasedOnRole($user): string
+	{
+		if ($user->role === 'admin') {
+			return route('admin.dashboard');
+		} elseif ($user->role === 'costumer') {
+			return route('business.dashboard');
+		} elseif ($user->role === 'user') {
+			return route('client.dashboard');
+		}
+		
+		return route('home');
+	}
     public function googleAuth(Request $request)
     {
         session(['business' => $request->get('business')]);
