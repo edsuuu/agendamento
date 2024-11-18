@@ -7,6 +7,7 @@ use App\Models\Business;
 use App\Models\Segments;
 use App\Models\SegmentTypes;
 use App\Models\User;
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
@@ -91,11 +92,12 @@ class AuthController extends Controller
                 }
             }
 
-
             return redirect($this->redirectBasedOnRole($user));
 //            dd($googleUser);
-        } catch (\Laravel\Socialite\Two\InvalidStateException $e) {
-            dd($e->getMessage());
+        }  catch (ClientException $e) {
+	        return redirect()->route('auth')->withErrors(['google' => 'Erro ao autenticar com Google. Por favor, tente novamente.']);
+        } catch (\Exception $e) {
+	        return redirect()->route('auth')->withErrors(['error' => 'Ocorreu um erro inesperado. Tente novamente.']);
         }
     }
 

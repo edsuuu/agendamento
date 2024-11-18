@@ -20,9 +20,14 @@
                         Acessar painel
                     </h1>
                     <div class="flex flex-col justify-center text-error-message text-center">
-                        @if( session('erro') )
+                        @if ($errors->has('google'))
                             <div class="alert alert-error">
-                                {{ session('erro') }}
+                                {{ $errors->first('google') }}
+                            </div>
+                        @endif
+                        @if ($errors->has('error'))
+                            <div class="alert alert-error">
+                                {{ $errors->first('error') }}
                             </div>
                         @endif
                     </div>
