@@ -3,8 +3,19 @@
         <h1 class="text-2xl font-bold text-black">
             Entre na sua conta
         </h1>
+        <div>
+            @if ($errors->has('google'))
+                <span class="text-red-500 text-[15px] font-medium">{{ $errors->first('google') }}</span>
+            @endif
+
+            @if ($errors->has('error'))
+                <div class="alert alert-danger">
+                    <span class="text-red-500 text-[15px] font-medium">{{ $errors->first('error') }}</span>
+                </div>
+            @endif
+        </div>
     </div>
-    <form id="login-form-id" method="POST" wire:submit.prevent="submit" class="flex flex-col gap-2">
+    <form method="POST" wire:submit.prevent="submit" class="flex flex-col gap-2">
         @csrf
         <div class="flex flex-col gap-4">
             <div class="text-black flex flex-col gap-0.5">
@@ -28,7 +39,8 @@
         </div>
         <div class="flex flex-row justify-between pl-0.5 pr-0.5 my-4">
             <div class="">
-                <label for="remember" class="flex flex-row items-center gap-2 cursor-pointer text-[14px] text-gray-700 font-medium">
+                <label for="remember"
+                    class="flex flex-row items-center gap-2 cursor-pointer text-[14px] text-gray-700 font-medium">
                     <input type="checkbox" name="remember" id="remember" class="cursor-pointer"
                         wire:model="formData.remember">
                     Manter conectado
@@ -49,7 +61,7 @@
         <div class="flex flex-row justify-center text-[15px]">
             <p class="text-gray-700 font-medium ">
                 Ainda não possuí uma conta? <span class="text-blue-link font-medium cursor-pointer hover:underline"
-                    onclick="swapDivs()">Cadastre-se</span>
+                    onclick="window.location = '{{ route('register') }}';">Cadastre-se</span>
             </p>
         </div>
         <div class="flex flex-row items-center w-full px-2 my-3">
@@ -90,7 +102,7 @@
             </button>
         </div>
         <div class="mt-3">
-            <p class="text-gray-700 font-medium text-[13.5px]">
+            <p class="text-gray-700 font-medium text-[13.5px] text-center">
                 Utilizamos cookies para melhorar sua experiência em nossos serviços. Ao realizar seu login, consideramos
                 que você aceita esta utilização. Para mais informações, acesse nossa <span
                     class="text-blue-link hover:underline cursor-pointer">Política de Privacidade</span>.

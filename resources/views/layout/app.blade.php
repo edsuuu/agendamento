@@ -8,6 +8,7 @@
     <title>@yield('title')</title>
     @livewireStyles
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css">
 </head>
 <body>
 @yield('content')

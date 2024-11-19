@@ -28,8 +28,9 @@
         </div>
     @else
         <div class="flex flex-row gap-4 items-center">
-            <a href="{{ route('auth') }}" class="hover:underline font-medium">Login</a>
-            <button class="py-[5px] px-[17px] bg-blue-white rounded-[6px] font-medium active:scale-[0.97]" onclick="window.location='{{ route('auth', ['register' => 'true']) }}'">
+            <a href="{{ route('login') }}" class="hover:underline font-medium">Login</a>
+            <button class="py-[5px] px-[17px] bg-blue-white rounded-[6px] font-medium active:scale-[0.97]" onclick="window.location='{{
+            route('register') }}'">
                 Comece já
             </button>
         </div>

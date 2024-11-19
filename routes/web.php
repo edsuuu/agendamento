@@ -9,14 +9,13 @@ use App\Http\Middleware\CheckRoleUser;
 Route::get('/', [SiteController::class, 'index'])->name('home');
 
 Route::prefix('auth')->group(function () {
-	Route::view('/', 'ejnex.auth.index')->name('auth');
-	
+	Route::view('/login', 'ejnex.auth.login')->name('login');
+	Route::view('/register', 'ejnex.auth.register')->name('register');
+
 	Route::middleware('web')->get('/google', [AuthController::class, 'googleAuth'])->name('google');
 	Route::middleware('web')->get('/google/callback', [AuthController::class, 'googleCallback']);
-	
-	Route::post('/login', [AuthController::class, 'loginForm'])->name('login');
+
 	Route::post('/register-business', [AuthController::class, 'registerBusiness'])->name('business.register');
-	Route::post('/register-user', [AuthController::class, 'registerUser'])->name('user.register');
 	Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 	Route::get('/delete-user', [AuthController::class, 'deleteUserInCompletedDataUserByGoogle'])->name('user.deleteUser');
 });

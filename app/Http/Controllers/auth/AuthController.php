@@ -35,7 +35,7 @@ class AuthController extends Controller
         $this->costumerRole = 'costumer';
         $this->userRole = 'user';
     }
-	
+
 	private function redirectBasedOnRole($user): string
 	{
 		if ($user->role === 'admin') {
@@ -45,7 +45,7 @@ class AuthController extends Controller
 		} elseif ($user->role === 'user') {
 			return route('client.dashboard');
 		}
-		
+
 		return route('home');
 	}
     public function googleAuth(Request $request)
@@ -171,44 +171,6 @@ class AuthController extends Controller
         return redirect()->route('business.dashboard');
     }
 
-    public function registerUser(Request $request)
-    {
-        $validateData = $request->validate([
-            'firstname' => 'required|string|max:40',
-            'lastname' => 'required|string|max:40',
-            'email' => 'required|string|email|unique:users',
-            'phone' => 'required|string|max:15',
-            'password' => 'required|string|confirmed',
-        ],
-            [
-                'firstname.required' => 'Nome é obrigatório.',
-                'firstname.max' => 'Nome não pode ter mais de 40 caracteres.',
-                'lastname.required' => 'Sobrenome é obrigatório.',
-                'lastname.max' => 'Sobrenome não pode ter mais de 40 caracteres.',
-                'email.required' => 'E-mail é obrigatório.',
-                'email.email' => 'E-mail deve ser válido.',
-                'email.unique' => 'Este e-mail já está cadastrado.',
-                'phone.required' => 'O número de telefone é obrigatório.',
-                'password.required' => 'A senha é obrigatória.',
-                'password.confirmed' => 'As senhas não coincidem.',
-            ]);
-
-
-        $user = $this->storeUser(
-            $validateData['firstname'],
-            $validateData['lastname'],
-            $validateData['email'],
-            $validateData['phone'],
-            $validateData['password'],
-            $this->userRole
-        );
-
-
-        Auth::login($user);
-
-        return redirect()->route('client.dashboard');
-    }
-
     private function storeUser($firstname, $lastname, $email, $phone, $password, $role)
     {
 
@@ -237,26 +199,26 @@ class AuthController extends Controller
     public function deleteUserInCompletedDataUserByGoogle(Request $request)
     {
 	    $cookie = null;
-	    
+
 	    if (Auth::check()) {
 		    $idUser = auth()->user()->id;
-		    
+
 		    $deleted = $this->userModel->where('id', $idUser)->delete();
-		    
+
 		    if ($deleted) {
 			    Auth::logout();
-			    
+
 			    $request->session()->invalidate();
 			    $request->session()->regenerateToken();
-			    
+
 			    $cookie = cookie('remember_token', '', -1);
 		    }
 	    }
-	    
+
 	    if ($cookie) {
 		    return redirect('auth')->withCookie($cookie);
 	    }
-	    
+
 	    return redirect('auth');
     }
 }
