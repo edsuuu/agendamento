@@ -78,7 +78,7 @@
                     <span class="text-red-500 text-[13px]">{{ $message }}</span>
                 @enderror
             </div>
-            <button onclick="manterFixado()" type="submit"
+            <button type="submit"
                 class="bg-blue-button w-full font-bold text-white-color rounded-[5px] py-2 transition-all duration-200
                     active:scale-[0.99]">Criar
                 minha conta
