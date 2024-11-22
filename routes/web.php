@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\auth\AuthController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\site\SiteController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckIfUserHasBusiness;
 use App\Http\Middleware\CheckRoleUser;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/', [SiteController::class, 'index'])->name('home');
+Route::view('/', 'ejnex.site.index')->name('home');
 
 Route::prefix('auth')->group(function () {
 	Route::view('/login', 'ejnex.auth.login')->name('login');

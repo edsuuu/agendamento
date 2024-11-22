@@ -1,4 +1,5 @@
 <div id="register-form" class=" w-[550px] px-4">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css">
     <div class="flex flex-col justify-center mt-3 mb-3">
         <h1 class="text-2xl font-bold text-black">
             Crie sua conta
@@ -21,7 +22,7 @@
             <div class="text-black flex flex-col gap-0.5">
                 <p class="text-gray-700 text-[14px] font-medium">Seu nome *</p>
                 <input type="text" name="firstName" placeholder="Nome do responsável"
-                    wire:model.defer="formData.firstName" wire:change="handleChange('formData.firstName')"
+                    wire:model.defer="formData.firstName"
                     class="border border-gray-300 outline-none p-2 pl-3 rounded focus:border-blue-link invalid:border-red-500"
                     minlength="3" maxlength="30">
                 @error('formData.firstName')
@@ -31,7 +32,7 @@
             <div class="text-black flex flex-col gap-0.5">
                 <p class="text-gray-700 text-[14px] font-medium">Seu sobrenome</p>
                 <input type="text" name="lastName" placeholder="Sobrenome do responsável"
-                    wire:model.defer="formData.lastName" wire:change="handleChange('formData.lastName')"
+                    wire:model.defer="formData.lastName"
                     class="border border-gray-300 outline-none p-2 pl-3 rounded focus:border-blue-link invalid:border-red-500"
                     minlength="3" maxlength="30">
                 @error('formData.lastName')
@@ -41,7 +42,7 @@
             <div class="text-black flex flex-col gap-0.5">
                 <p class="text-gray-700 text-[14px] font-medium">Nome do seu negócio *</p>
                 <input type="text" name="nameBusiness" placeholder="Como você chama seu negócio"
-                    wire:model.defer="formData.nameBusiness" wire:change="handleChange('formData.nameBusiness')"
+                    wire:model.defer="formData.nameBusiness"
                     class="border border-gray-300 outline-none p-2 pl-3 rounded focus:border-blue-link invalid:border-red-500"
                     minlength="3" maxlength="30">
                 @error('formData.nameBusiness')
@@ -52,7 +53,6 @@
                 <p class="text-gray-700 text-[14px] font-medium">Celular *</p>
 
                 <input type="tel" id="phone" wire:model.defer="formData.phone"
-                    wire:change="handleChange('formData.phone')"
                     class="border border-gray-300 outline-none p-2 pl-3 rounded focus:border-blue-link invalid:border-red-500 w-full"
                     placeholder="(99) 99999-9999" maxlength="15" />
                 @error('formData.phone')
@@ -64,7 +64,6 @@
             <div class="text-black flex flex-col gap-0.5">
                 <p class="text-gray-700 text-[14px] font-medium">Seu e-mail *</p>
                 <input type="email" name="email" placeholder="Digite o seu email" wire:model.defer="formData.email"
-                    wire:change="handleChange('formData.email')"
                     class="border border-gray-300 outline-none p-2 pl-3 rounded focus:border-blue-link invalid:border-red-500">
                 @error('formData.email')
                     <span class="text-red-500 text-[13px]">{{ $message }}</span>
@@ -73,7 +72,7 @@
             <div class="text-black flex flex-col gap-0.5">
                 <p class="text-gray-700 text-[14px] font-medium">Senha *</p>
                 <input type="password" name="password" placeholder="Digite a sua senha"
-                    wire:model.defer="formData.password" wire:change="handleChange('formData.password')"
+                    wire:model.defer="formData.password"
                     class="border border-gray-300 outline-none p-2 pl-3 rounded focus:border-blue-link invalid:border-red-500">
                 @error('formData.password')
                     <span class="text-red-500 text-[13px]">{{ $message }}</span>
@@ -174,5 +173,8 @@
         }
 
         event.target.value = phone;
+
+
+
     });
 </script>

@@ -2,7 +2,7 @@
 @include('layout.navbar.navbar-site')
 @section('title', 'Complete seu Perfil')
 @section('content')
-	
+
 	<div class="w-full flex flex-row" id="content">
 		<div class="bg-blue-black w-full flex flex-col justify-evenly">
 			<div class="flex flex-col gap-4 justify-center items-center text-white">
@@ -18,7 +18,7 @@
 					</p>
 				</div>
 			</div>
-			
+
 			<div
 					class="flex flex-col md:flex-row items-center justify-center max-w-full md:w-[500px] mx-auto space-y-4 md:space-y-0 md:space-x-4">
 				<div class="flex flex-col items-center text-center gap-1">
@@ -32,8 +32,7 @@
                     </span>
 					<p class="text-[14px] leading-4 text-white">Criando sua conta</p>
 				</div>
-				<li
-						class="flex w-full items-center text-blue-link dark:text-blue-link after:content-[''] after:w-full after:h-0.5 after:border-b after:border-blue-link after:border-2 after:inline-block dark:after:text-blue-link">
+				<li class="flex w-full items-center text-blue-link dark:text-blue-link after:content-[''] after:w-full after:h-0.5 after:border-b after:border-blue-link after:border-2 after:inline-block dark:after:text-blue-link">
 				</li>
 				<div class="flex flex-col items-center text-center gap-1">
                     <span
@@ -47,11 +46,11 @@
 					<p class="text-[14px] leading-4 text-white">Completando seu perfil</p>
 				</div>
 			</div>
-			
-			<div class="flex flex-row text-white justify-center items-center text-center"
-			     onclick=" window.location = '{{ route('user.deleteUser')}}'">
-				<p class="hover:underline cursor-pointer">Excluir sua conta ?</p>
-			</div>
+
+{{--			<div class="flex flex-row text-white justify-center items-center text-center"--}}
+{{--			     onclick=" window.location = '{{ route('user.deleteUser')}}'">--}}
+{{--				<p class="hover:underline cursor-pointer">Excluir sua conta ?</p>--}}
+{{--			</div>--}}
 		</div>
 		<div class="w-full">
 			@livewire('complete-profile-forms')

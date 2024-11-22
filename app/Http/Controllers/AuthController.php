@@ -1,48 +1,39 @@
 <?php
 
-namespace App\Http\Controllers\auth;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Business;
-use App\Models\Segments;
-use App\Models\SegmentTypes;
 use App\Models\User;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 use PHPUnit\TextUI\Application;
-use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
-    private readonly Business $businessModel;
-    private readonly User $userModel;
-
     private readonly string $costumerRole;
     // private readonly string $adminRole;
     private readonly string $userRole;
 
-    public function __construct(Business $businessModel, User $userModel)
+    public function __construct()
     {
-        $this->businessModel = $businessModel;
-        $this->userModel = $userModel;
-
-       // $this->adminRole = 'admin';
+        // $this->adminRole = 'admin';
         $this->costumerRole = 'costumer';
         $this->userRole = 'user';
     }
 
-	private function redirectBasedOnRole($user): string
-	{
-		if ($user->role === 'admin') {
-			return route('admin.dashboard');
-		} elseif ($user->role === 'costumer') {
-			return route('business.dashboard');
-		} elseif ($user->role === 'user') {
+    private function redirectBasedOnRole($user): string
+    {
+        if ($user->role === 'admin') {
+            return route('admin.dashboard');
+        } elseif ($user->role === 'costumer') {
+            return route('business.dashboard');
+        } elseif ($user->role === 'user') {
 			return route('client.dashboard');
 		}
 
@@ -70,10 +61,10 @@ class AuthController extends Controller
 
 //            dd($googleUser);
 
-            $user = $this->userModel::where('email', $googleUser->getEmail())->first();
+            $user = User::where('email', $googleUser->getEmail())->first();
 
             if(!$user){
-                $user = $this->userModel::create([
+                $user = User::create([
                     'first_name' => $googleUser->user['given_name'],
                     'last_name' => $googleUser->user['family_name'] ?? null,
                     'email' => $googleUser->user['email'],
@@ -88,14 +79,14 @@ class AuthController extends Controller
                 $user->update([
                     'google_id' => $googleUser->user['id'],
                     'photo' => $googleUser->user['picture'],
-                    'email_verified_at' => now(),
+                    'emailsite.home_verified_at' => now(),
                 ]);
             }
 
             Auth::login($user, 'on');
 
             if($user->role === $this->costumerRole){
-                $businessId = $this->businessModel::where('id_user', $user->id)->value('id');
+                $businessId = Business::where('id_user', $user->id)->value('id');
 //                dd($businessId);
                 if($businessId){
                     return redirect($this->redirectBasedOnRole($user));
@@ -154,13 +145,13 @@ class AuthController extends Controller
 
 //        dd($idUser);
 
-        $existingBusiness = $this->businessModel->where('id_user', $user->id)->first();
+        $existingBusiness = Business::where('id_user', $user->id)->first();
 
         if ($existingBusiness != null) {
             return redirect()->back()->withErrors(['business_exists' => 'Este usuário já possui um comércio cadastrado.']);
         }
 
-        $this->businessModel->createBusiness(
+        Business::createBusiness(
             $validateData['businessname'],
             $user->id,
             $validateData['segmentType']
@@ -176,7 +167,7 @@ class AuthController extends Controller
 
         $hashPasswd = Hash::make($password);
 
-        $data = $this->userModel->createUser($firstname, $lastname, $email, $phone, $hashPasswd, $role);
+        $data = User::createUser($firstname, $lastname, $email, $phone, $hashPasswd, $role);
 
 //        dd($data);
 
@@ -203,7 +194,7 @@ class AuthController extends Controller
 	    if (Auth::check()) {
 		    $idUser = auth()->user()->id;
 
-		    $deleted = $this->userModel->where('id', $idUser)->delete();
+		    $deleted = User::where('id', $idUser)->delete();
 
 		    if ($deleted) {
 			    Auth::logout();
