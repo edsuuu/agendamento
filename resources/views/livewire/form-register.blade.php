@@ -141,7 +141,7 @@
     </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>--}}
 <script>
     function activeSpinnerAndRedirectRegister() {
         document.getElementById('logo-google-register').classList.add('hidden')
@@ -151,11 +151,11 @@
         }, 1000);
     }
 
-    const input = document.querySelector("#phone");
-    window.intlTelInput(input, {
-        initialCountry: "br",
-        loadUtilsOnInit: "https://cdn.jsdelivr.net/npm/intl-tel-input@24.7.0/build/js/utils.js",
-    });
+    // const input = document.querySelector("#phone");
+    // window.intlTelInput(input, {
+    //     initialCountry: "br",
+    //     loadUtilsOnInit: "https://cdn.jsdelivr.net/npm/intl-tel-input@24.7.0/build/js/utils.js",
+    // });
 
     document.getElementById('phone').addEventListener('input', function(event) {
         let phone = event.target.value;
