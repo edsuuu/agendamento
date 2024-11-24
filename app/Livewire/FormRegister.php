@@ -5,12 +5,13 @@ namespace App\Livewire;
 use App\Models\Business;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 
 class FormRegister extends Component
 {
-	
+
 	public  $formData = [
 		'firstName' => '',
 		'lastName' => '',
@@ -19,12 +20,12 @@ class FormRegister extends Component
 		'email' => '',
 		'password' => '',
 	];
-	
+
 	public $permissionBusiness = 'costumer';
-	
+
 	public function submitRegister()
 	{
-		
+
 		$this->validate([
 			'formData.firstName' => 'required|string|min:3|max:30',
 			'formData.lastName' => 'nullable|string|min:3|max:30',
@@ -53,9 +54,10 @@ class FormRegister extends Component
 			'formData.password.required' => 'A senha é obrigatória.',
 			'formData.password.min' => 'A senha deve ter no mínimo 6 caracteres.',
 		]);
-		
-		
-		try {
+
+        DB::beginTransaction();
+
+        try {
 			$user = User::create([
 				'first_name' => $this->formData['firstName'],
 				'last_name' => $this->formData['lastName'],
@@ -68,22 +70,28 @@ class FormRegister extends Component
 			Business::create([
 			'name' => $this->formData['nameBusiness'],
 			'id_user' => $user->id]);
-		
-			Auth::loginUsingId($user->id);
-			
-			return redirect()->route('business.dashboard');
-		} catch (\Exception $e) {
-			
-			session()->flash('error', 'Erro ao criar a conta. Por favor, tente novamente mais tarde.');
-			return redirect()->back();
-		}
+            DB::commit();
+
+            Auth::login($user);
+
+            if(Auth::check()){
+                return redirect()->route('business.profile-complete');
+            }
+
+            session()->flash('error', 'Erro ao autenticar usuário.');
+            return redirect()->route('login');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            session()->flash('error', 'Erro ao criar a conta. Por favor, tente novamente mais tarde.');
+            return redirect()->back();
+        }
 	}
-	
+
 	public function handleChange($field): void
 	{
 		$this->resetErrorBag($field);
 	}
-	
+
 	public function render()
 	{
 		return view('livewire.form-register');
