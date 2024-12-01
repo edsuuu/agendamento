@@ -1,3 +1,7 @@
-<div>
-	<h1>Agpra falta pouco</h1>
-</div>
+@extends('layout.app')
+
+@section('content')
+
+    @livewire('steps-complete-profile')
+
+@endsection

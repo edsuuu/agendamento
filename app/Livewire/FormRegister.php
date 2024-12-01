@@ -36,7 +36,7 @@ class FormRegister extends Component
 				'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
 				'unique:users,email',
 			],
-			'formData.password' => 'required|min:6',
+			'formData.password' => 'required|min:3',
 		], [
 			'formData.firstName.required' => 'O nome é obrigatório.',
 			'formData.firstName.min' => 'O nome deve ter no mínimo 3 caracteres.',
@@ -75,6 +75,7 @@ class FormRegister extends Component
             Auth::login($user);
 
             if(Auth::check()){
+                sleep(2);
                 return redirect()->route('business.profile-complete');
             }
 

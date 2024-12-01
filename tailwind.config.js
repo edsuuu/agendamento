@@ -24,7 +24,8 @@ export default {
                 'white-opaco': '#ECE9E9',
                 'border-gray': '#0000005f',
                 'gray-text':'#8795ae',
-                'error-message': '#EF4444'
+                'error-message': '#EF4444',
+                'blue-for-complete': '#4388F7',
             }
         },
     },
