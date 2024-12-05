@@ -16,7 +16,8 @@ return new class extends Migration
 
             $table->string('name', 50);
 
-            $table->foreignId('id_business')->constrained('businesses')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('businesses_id')->constrained('businesses')->onDelete('cascade')
+	            ->onUpdate('cascade');
 
             $table->timestamps();
         });

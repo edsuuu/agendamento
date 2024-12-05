@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name', 40);
 
-            $table->foreignId('id_segments')->constrained('segments')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('segments_id')->constrained('segments')->onDelete('cascade')->onUpdate
+            ('cascade');
 
             $table->timestamps();
         });

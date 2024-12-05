@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('zip', 9)->nullable();
             $table->string('photo')->nullable();
 
-            $table->foreignId('id_user')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
 
             $table->foreignId('segment_type_id')->nullable()->constrained('segment_types')->onDelete
             ('cascade')->onUpdate('cascade');

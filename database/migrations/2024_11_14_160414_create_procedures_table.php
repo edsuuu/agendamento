@@ -19,9 +19,10 @@ return new class extends Migration
             $table->float('duration');
             $table->string('photo', 255)->nullable();
 
-            $table->foreignId('id_procedure_category')->nullable()->constrained('procedure_categories')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('procedure_category_id')->nullable()->constrained('procedure_categories')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->foreignId('id_business')->constrained('businesses')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('business_id')->constrained('businesses')->onDelete('cascade')
+	            ->onUpdate('cascade');
 
             $table->timestamps();
         });
