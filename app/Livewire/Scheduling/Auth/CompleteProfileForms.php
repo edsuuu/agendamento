@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Scheduling\Auth;
 
 use App\Models\Business;
 use App\Models\SegmentTypes;
-use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 
@@ -17,40 +16,40 @@ class CompleteProfileForms extends Component
 		'password' => '',
 		'password_confirmation' => '',
 	];
-	
+
 	public $segmentsTypes = [];
-	
+
 	public function mount()
 	{
 		$this->segmentsTypes = SegmentTypes::orderBy('name', 'asc')->get();
 	}
-	
+
 	public function handleChange($field)
 	{
 		$this->resetErrorBag($field);
 	}
-	
-	
+
+
 	public function handlePhoneChange($field)
 	{
 		$this->formatPhone();
-		
+
 		$this->handleChange($field);
 	}
-	
+
 	public function formatPhone()
 	{
 		$cleaned = preg_replace('/\D/', '', $this->formData['phone']);
-		
+
 		if (strlen($cleaned) <= 10) {
 			$formatted = preg_replace('/(\d{2})(\d{4})(\d{0,4})/', '($1) $2-$3', $cleaned);
 		} else {
 			$formatted = preg_replace('/(\d{2})(\d{5})(\d{0,4})/', '($1) $2-$3', $cleaned);
 		}
-		
+
 		$this->formData['phone'] = $formatted;
 	}
-	
+
 	public function submitForm()
 	{
 		$this->validate([
@@ -69,34 +68,31 @@ class CompleteProfileForms extends Component
 			'formData.password.regex' => 'A senha deve conter pelo menos uma letra maiúscula e um caractere especial.',
 			'formData.password_confirmation.required' => 'A confirmação de senha é obrigatória.',
 		]);
-		
+
 		$user = auth()->user();
-		
+
 		try {
 			$user->update([
 				'phone' => $this->formData['phone'],
 				'password' => Hash::make($this->formData['password']),
 			]);
-			
+
 			Business::create([
 				'name' => $this->formData['commerceName'],
 				'segment_type_id' => $this->formData['segmentType'],
 				'id_user' => $user->id,
 			]);
-			
+
 			session()->flash('message', 'Cadastro atualizado com sucesso!');
-			
+
 			return redirect()->route('business.dashboard');
 		} catch (\Exception $e) {
 			dd($e->getMessage());
 		}
 	}
-	
-	
+
 	public function render()
 	{
 		return view('livewire.complete-profile-forms');
 	}
-	
-	
 }

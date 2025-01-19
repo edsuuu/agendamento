@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -52,26 +52,8 @@ class User extends Authenticatable
         ];
     }
 
-    public function createUser($firstname, $lastname, $email, $password, $phone, $role)
+    public function business(): HasOne
     {
-
-//        dd($firstname, $lastname, $email, $password, $phone);
-        $created = self::create([
-            'first_name' => $firstname,
-            'last_name' => $lastname,
-            'email' => $email,
-            'password' => $password,
-            'phone' => $phone,
-            'role' => $role,
-        ]);
-
-        return $created;
+        return $this->hasOne(Business::class, 'user_id', 'id');
     }
-
-    public function business()
-    {
-        return $this->hasOne(Business::class, 'id_user', 'id');
-    }
-
-
 }

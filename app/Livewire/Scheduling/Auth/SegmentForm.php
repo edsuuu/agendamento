@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Scheduling\Auth;
 
 use App\Models\Segments;
 use App\Models\SegmentTypes;

@@ -174,19 +174,6 @@ class AuthController extends Controller
         return $data;
     }
 
-    public function logout(Request $request): Application|RedirectResponse|Redirector
-    {
-        Auth::logout();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        $cookie = cookie('remember_token', '', -1);
-
-        return redirect('/')->withCookie($cookie);
-    }
-
-
     public function deleteUserInCompletedDataUserByGoogle(Request $request)
     {
 	    $cookie = null;
