@@ -89,7 +89,9 @@
                             </svg>
                         </span>
                         <span class="hidden" id="spinner-login">
-{{--                            @include('components.spinner-google.blade.svg')--}}
+                           <svg class="spinner" width="20px" height="20px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                                <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                           </svg>
                         </span>
                     </div>
                     <span class="text-sm text-[#1f1f1f] flex flex-row gap-2 items-center">

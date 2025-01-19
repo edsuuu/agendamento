@@ -20,13 +20,11 @@
             @if(auth()->user()->role === 'costumer')
                 @if(auth()->user()->business)
                     <h1><a href="{{ route('dashboard') }}">Dashboard</a></h1>
-                @else
-{{--                    <h1><a href="{{ route('business.complete-profile.google') }}">Complete seu Cadastro</a></h1>--}}
+                    {{--                    <h1><a href="{{ route('business.complete-profile.google') }}">Complete seu Cadastro</a></h1>--}}
                     <h1>123123123</h1>
                 @endif
             @elseif(auth()->user()->role === 'admin')
                 <h1><a href="{{ route('admin.dashboard') }}">Dashboard</a></h1>
-
             @endif
             <a href="{{ route('logout') }}">Sair</a>
         </div>

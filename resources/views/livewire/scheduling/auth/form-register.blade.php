@@ -54,7 +54,8 @@
             <div class="text-black flex flex-col gap-0.5">
                 <p class="text-gray-700 text-[14px] font-medium">Celular *</p>
 
-                <input type="tel" id="phone" wire:model.defer="formData.phone" wire:change="handleChange('formData.phone')"
+                <input type="tel" id="phone" wire:model.defer="formData.phone"
+                       wire:change="handleChange('formData.phone')"
                        class="border border-gray-300 outline-none p-2 pl-3 rounded focus:border-blue-link invalid:border-red-500 w-full"
                        placeholder="(99) 99999-9999" maxlength="15" x-mask:dynamic="maskPhone"/>
                 @error('formData.phone')
@@ -65,7 +66,8 @@
             </div>
             <div class="text-black flex flex-col gap-0.5">
                 <p class="text-gray-700 text-[14px] font-medium">Seu e-mail *</p>
-                <input type="email" name="email" placeholder="Digite o seu email" wire:change="handleChange('formData.email')" wire:model.defer="formData.email"
+                <input type="email" name="email" placeholder="Digite o seu email"
+                       wire:change="handleChange('formData.email')" wire:model.defer="formData.email"
                        class="border border-gray-300 outline-none p-2 pl-3 rounded focus:border-blue-link invalid:border-red-500">
                 @error('formData.email')
                 <span class="text-red-500 text-[13px]">{{ $message }}</span>
@@ -106,7 +108,8 @@
     <div class="flex flex-col gap-3 mt-4">
         <div class="flex flex-row justify-center text-[15px]">
             <p class="text-gray-700 font-medium ">
-                Já possuí uma conta? <span class="text-blue-link font-medium cursor-pointer hover:underline" onclick="window.location = '{{ route('login') }}'">Fazer Login</span>
+                Já possuí uma conta? <span class="text-blue-link font-medium cursor-pointer hover:underline"
+                                           onclick="window.location = '{{ route('login') }}'">Fazer Login</span>
             </p>
         </div>
         <div class="flex flex-row items-center w-full px-2 my-1">
@@ -137,7 +140,11 @@
                             </svg>
                         </span>
                         <span class="hidden" id="spinner-register">
-{{--                            <img src="{{asset('images/spinner-google.blade.svg')}}" alt="Logo Spiner">--}}
+                            <svg class="spinner" width="20px" height="20px" viewBox="0 0 66 66"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33"
+                                    r="30"></circle>
+                            </svg>
                         </span>
                     </div>
                     <span class="text-sm text-[#1f1f1f] flex flex-row gap-2 items-center">
