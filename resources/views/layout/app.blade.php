@@ -15,7 +15,7 @@
 
 {{-- Modais importa aq  e scripts  --}}
 
-@if(Auth::check())
+@if(Auth::check() && !request()->is('/', 'complete-profile'))
     <div class="w-full h-full flex flex-row border border-black">
         <x-navbar-auth>
             <main>

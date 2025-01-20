@@ -14,6 +14,9 @@ export default {
             fontFamily: {
                 sans: ['Inter', ...defaultTheme.fontFamily.sans],
             },
+            height: {
+                'content': 'calc(100vh - 57px)'
+            },
             colors: {
                 'blue-black': '#043873',
                 'blue-white': '#4F9CF9',

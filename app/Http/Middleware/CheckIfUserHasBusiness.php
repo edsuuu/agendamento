@@ -20,14 +20,14 @@ class CheckIfUserHasBusiness
 	{
 		if (Auth::check()) {
 			$user = Auth::user();
-			
-			$existingBusiness = Business::where('id_user', $user->id)->first();
-			
+
+			$existingBusiness = Business::where('user_id', $user->id)->first();
+
 			if ($existingBusiness) {
-				return redirect()->route('business.dashboard');
+				return redirect()->route('dashboard');
 			}
 		}
-		
+
 		return $next($request);
 	}
 }

@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthProvidersController;
+use App\Http\Middleware\CheckIfUserHasBusiness;
+use App\Http\Middleware\CheckIfUserNotHasBusiness;
 
 Route::view('/', 'scheduling.home-page')->name('home');
 
@@ -26,8 +28,10 @@ Route::prefix('auth')->group(function () {
 });
 
 
-Route::middleware('auth')->group(function () {
-	Route::view('/dashboard', 'scheduling.dashboard.dashboard')->name('dashboard');
-//    Route::view('/complete-profile-google', 'ejnex.business.complete-profile')->name('business.complete-profile.google')->middleware([CheckIfUserHasBusiness::class]);
-//    Route::view('/complete-profile', 'ejnex.business.complete-business')->name('business.profile-complete');
+Route::middleware(['auth', CheckIfUserHasBusiness::class])->get('/complete-profile', function () {
+    return view('scheduling.auth.complete-profile');
+})->name('complete-profile');
+
+Route::middleware(['auth', CheckIfUserNotHasBusiness::class])->group(function () {
+    Route::view('/dashboard', 'scheduling.dashboard.dashboard')->name('dashboard');
 });

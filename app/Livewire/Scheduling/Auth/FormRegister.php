@@ -55,7 +55,7 @@ class FormRegister extends Component
 				'email' => $validatedData['formData']['email'],
 				'phone' => '+55 ' . $validatedData['formData']['phone'],
 				'password' => Hash::make($validatedData['formData']['password']),
-				'role' => 'costumer',
+				'role' => 'customer',
 			]);
 
 			Business::create([

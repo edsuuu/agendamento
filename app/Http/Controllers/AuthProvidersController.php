@@ -5,15 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Business;
 use App\Models\User;
 use GuzzleHttp\Exception\ClientException;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
-use PHPUnit\TextUI\Application;
 
 class AuthProvidersController extends Controller
 {
@@ -63,8 +59,8 @@ class AuthProvidersController extends Controller
 
             $businessId = Business::where('user_id', $user->id)->value('id');
 
-            if (!$businessId && !$user->role == 'admin') {
-                return redirect('dashboard');  // redirecionar para completar o perfil do comercio caso n tenha
+            if (!$businessId && $user->role == 'customer') {
+                return redirect('complete-profile');
             }
 
             return redirect('dashboard');
