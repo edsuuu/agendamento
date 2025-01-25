@@ -21,38 +21,50 @@
                     <li class="text-white {{ $currentStep === 3 ? 'font-bold' : '' }}">Etapa 3</li>
                     <li class="text-white {{ $currentStep === 4 ? 'font-bold' : '' }}">Etapa 4</li>
                 </ul>
-                <div
-                    class="flex flex-col md:flex-row items-center justify-center max-w-full md:w-[500px] mx-auto space-y-4 md:space-y-0 md:space-x-4">
-                    <div class="flex flex-col items-center text-center gap-1">
-                    <span
-                        class="flex items-center justify-center w-10 h-10 bg-white rounded-full dark:bg-blue-link shrink-0">
-                        <svg class="w-4 h-4 text-blue-link dark:text-white" aria-hidden="true"
-                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M1 5.917 5.724 10.5 15 1.5"/>
-                        </svg>
-                    </span>
-                        <p class="text-[14px] leading-4 text-white">Criando sua conta</p>
-                    </div>
-                    <li class="flex w-full items-center text-blue-link dark:text-blue-link after:content-[''] after:w-full after:h-0.5 after:border-b after:border-blue-link after:border-2 after:inline-block dark:after:text-blue-link">
-                    </li>
-                    <div class="flex flex-col items-center text-center gap-1">
-                    <span
-                        class="flex items-center justify-center w-10 h-10 bg-blue-link rounded-full  dark:bg-white shrink-0">
-                        <svg class="w-5 h-5 text-gray-500 dark:text-blue-link" aria-hidden="true"
-                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
-                            <path
-                                d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2ZM7 2h4v3H7V2Zm5.7 8.289-3.975 3.857a1 1 0 0 1-1.393 0L5.3 12.182a1.002 1.002 0 1 1 1.4-1.436l1.328 1.289 3.28-3.181a1 1 0 1 1 1.392 1.435Z"/>
-                        </svg>
-                    </span>
-                        <p class="text-[14px] leading-4 text-white">Completando seu perfil</p>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
+
+
     <div class="w-full h-full">
         @if ($currentStep === 1)
+            <div class="h-full flex flex-col max-w-2xl m-auto gap-7">
+                <div class="mt-28">
+                    <h1 class="font-bold text-2xl">Informações Pessoais</h1>
+                    <p>Para começar, é importante que você preencha seus dados </p>
+                </div>
+
+
+
+                @foreach($segmentsTypes as $s)
+                    <p>{{$s}}</p>
+                @endforeach
+                <div class="border border-black w-full grid grid-cols-2 gap-4">
+                        <h1>Nome do seu comercio</h1>
+                        <h1>Numero de celular </h1>
+                </div>
+                <div>
+                    <h1>Onde nos conheceu ?</h1>
+                    <select name="" id="">
+                        <option>Google</option>
+                        <option>Instagram</option>
+                        <option>Facebook</option>
+                        <option>Amigo</option>
+                        <option>Anuncio</option>
+                    </select>
+
+                </div>
+                <div class="w-full">
+                    <button
+                        class="bg-blue-black w-full text-center rounded-[5px] p-3 text-white font-medium text-[16px] cursor-pointer"
+                        wire:click="nextStep"
+                        class="btn btn-secondary"
+                        {{ $currentStep === 5 ? 'disabled' : '' }}>
+                        Continuar
+                    </button>
+                </div>
+            </div>
+        @elseif ($currentStep === 2)
             <div class="h-full flex flex-col max-w-2xl m-auto gap-7">
                 <div class="mt-28">
                     <h1 class="font-bold text-2xl">Com qual perfil você se encaixa</h1>
@@ -96,28 +108,124 @@
                         class="bg-blue-black w-full text-center rounded-[5px] p-3 text-white font-medium text-[16px] cursor-pointer"
                         wire:click="nextStep"
                         class="btn btn-secondary"
-                        {{ $currentStep === 4 ? 'disabled' : '' }}>
+                        {{ $currentStep === 5 ? 'disabled' : '' }}>
                         Continuar
                     </button>
                 </div>
             </div>
-        @elseif ($currentStep === 2)
-            <div>
-                Etapa 2: Informações de Contato
-                <button
-                    wire:click="previousStep"
-                    class="btn btn-secondary"
-                    {{ $currentStep === 1 ? 'disabled' : '' }}>
-                    Voltar
-                </button>
-                <button
-                    wire:click="nextStep"
-                    class="bg-gray-600"
-                    {{ $currentStep === 4 ? 'disabled' : '' }}>
-                    Continuar
-                </button>
-            </div>
         @elseif ($currentStep === 3)
+           <div class="h-full flex flex-col max-w-2xl m-auto gap-7">
+                Etapa 2: Informações de Contato
+
+                <div class="rounded-lg flex items-center justify-center text-white border border-gray-400 w-full  p-6">
+                    <form method="POST" wire:submit.prevent="submitForm" class="text-black w-full">
+                        @csrf
+
+                        {{-- Nome do Comércio--}}
+                        <label class="block mb-4">
+                            <span class="text-[15px] text-gray-700">Qual é o nome do seu comércio?</span>
+                            <input type="text" name="commerceName" wire:model.defer="formData.commerceName"
+                                   wire:change="handleChange('formData.commerceName')"
+                                   class="w-full mt-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1
+				       focus:ring-blue-500"
+                                   placeholder="Nome do comercio"
+                            >
+                            @error('formData.commerceName')
+                            <span class="text-red-500 text-[13px]">{{ $message }}</span>
+                            @enderror
+                        </label>
+
+                        {{--Tipo de Segmento--}}
+                        <label for="segmentType" class="block mb-4">
+                            <span class="text-[15px] text-gray-700">Selecione o tipo do seu segmento</span>
+                            <select name="segmentType" wire:model.defer="formData.segmentType"
+                                    wire:change="handleChange('formData.segmentType')"
+                                    class="w-full border border-gray-300 cursor-pointer outline-none rounded-lg text-[14px]">
+                                <option value="" disabled selected>Selecione um tipo de segmento</option>
+                                @foreach($segmentsTypes as $segmentType)
+                                    <option value="{{ $segmentType->id }}">{{ $segmentType->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('formData.segmentType')
+                            <span class="text-red-500 text-[13px]">{{ $message }}</span>
+                            @enderror
+                        </label>
+
+                        {{-- Telefone --}}
+                        <label class="block mb-4">
+                            <span class="text-[15px] text-gray-700">Cadastre um número de Telefone / Celular</span>
+                            <input type="text" name="phone" wire:model.defer="formData.phone" wire:change="handlePhoneChange('formData.phone')"
+                                   class="w-full mt-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                   placeholder="(00) 98765-4321"
+                                   maxlength="15"
+                            >
+                            @error('formData.phone')
+                            <span class="text-red-500 text-[13px]">{{ $message }}</span>
+                            @enderror
+                        </label>
+
+                        {{-- Nova Senha --}}
+                        <div class="block mb-4">
+                            <span class="text-lg font-bold mb-2">Cadastre uma nova senha:</span>
+                            <label class="block mb-4">
+                                <span class="text-[15px] text-gray-700">Sua nova senha</span>
+                                <input type="password" name="password" wire:model.defer="formData.password"
+                                       class="w-full mt-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1
+					       focus:ring-blue-500"
+                                       maxlength="50"
+                                       placeholder="********"
+                                       wire:change="handleChange('formData.password')"
+                                >
+                                @error('formData.password')
+                                <span class="text-red-500 text-[13px]">{{ $message }}</span>
+                                @enderror
+                            </label>
+
+                            <label class="block mb-4">
+                                <span class="text-[15px] text-gray-700">Confirme sua nova senha</span>
+                                <input type="password" name="password_confirmation" wire:model.defer="formData.password_confirmation"
+                                       class="w-full mt-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1
+					       focus:ring-blue-500"
+                                       maxlength="50"
+                                       placeholder="********"
+                                       wire:change="handleChange('formData.password_confirmation')"
+                                >
+                                @error('formData.password_confirmation')
+                                <span class="text-red-500 text-[13px]">{{ $message }}</span>
+                                @enderror
+                            </label>
+                        </div>
+
+                        {{-- Botão de Enviar --}}
+                        <button type="submit"
+                                class="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition
+			        transform:scale-[0.97]"
+                        >
+                            Enviar
+                        </button>
+                    </form>
+                </div>
+
+
+               <div class="w-full flex flex-row gap-10">
+                   <button
+                       class="bg-blue-black w-full text-center rounded-[5px] p-3 text-white font-medium text-[16px] cursor-pointer"
+                       wire:click="previousStep"
+                       class="btn btn-secondary"
+                       {{ $currentStep === 1 ? 'disabled' : '' }}>
+                       Voltar
+                   </button>
+                   <button
+                       class="bg-blue-black w-full text-center rounded-[5px] p-3 text-white font-medium text-[16px] cursor-pointer"
+                       wire:click="nextStep"
+                       class="btn btn-secondary"
+                       {{ $currentStep === 5 ? 'disabled' : '' }}>
+                       Continuar
+                   </button>
+               </div>
+
+            </div>
+        @elseif ($currentStep === 4)
             <div>
                 Etapa 3: Confirmação
                 <button
@@ -129,11 +237,11 @@
                 <button
                     wire:click="nextStep"
                     class="bg-gray-600"
-                    {{ $currentStep === 4 ? 'disabled' : '' }}>
+                    {{ $currentStep === 5 ? 'disabled' : '' }}>
                     Continuar
                 </button>
             </div>
-        @elseif ($currentStep === 4)
+        @elseif ($currentStep === 5)
             <div>
                 Etapa 4: Finalização
                 <button
@@ -145,7 +253,7 @@
                 <button
                     wire:click="nextStep"
                     class="bg-gray-600"
-                    {{ $currentStep === 4 ? 'disabled' : '' }}>
+                    {{ $currentStep === 5 ? 'disabled' : '' }}>
                     Continuar
                 </button>
             </div>
