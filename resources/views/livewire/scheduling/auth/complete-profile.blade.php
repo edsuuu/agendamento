@@ -1,9 +1,7 @@
 <div class="flex h-content flex-1 overflow-y-hidden">
-    {{--    Lado esquerdo --}}
     <div class="w-full h-full bg-blue-black">
-        <div class="w-full h-full flex flex-row">
-            <div class="bg-blue-black w-full h-full flex flex-col justify-evenly">
-
+        <div class="w-full flex flex-row">
+            <div class="bg-blue-black w-full flex flex-col justify-evenly">
                 <div class="flex flex-col gap-4 justify-center items-center text-white">
                     <div>
                         <h1 class="text-3xl font-medium">Seja Bem vindo, {{ auth()->user()->first_name }} !</h1>
