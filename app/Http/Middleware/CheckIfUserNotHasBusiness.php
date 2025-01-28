@@ -20,8 +20,23 @@ class CheckIfUserNotHasBusiness
         if (Auth::check()) {
             $user = Auth::user();
 
-            if(!$user->business && $user->role !== 'admin') {
-                return redirect()->route('complete-profile');
+            if($user->role !== 'admin') {
+                $array = [
+                    'name',
+                    'address',
+                    'city',
+                    'neighborhood',
+                    'number_address',
+                    'state',
+                    'zip',
+                    'referral_source',
+                ];
+
+                foreach ($array as $field) {
+                    if (empty($user->business->{$field})) {
+                        return redirect()->route('complete-profile');
+                    }
+                }
             }
         }
 

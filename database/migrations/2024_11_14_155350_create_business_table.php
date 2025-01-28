@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('businesses', function (Blueprint $table) {
+        Schema::create('business', function (Blueprint $table) {
             $table->id();
             $table->string('name', 60);
             $table->string('documents', 18)->unique()->nullable();
             $table->string('address', 60)->nullable();
             $table->string('city')->nullable();
+            $table->string('neighborhood')->nullable();
             $table->string('number_address', 10)->nullable();
             $table->string('state', 2)->nullable();
             $table->string('zip', 9)->nullable();
@@ -28,6 +29,8 @@ return new class extends Migration
             ('cascade')->onUpdate('cascade');
 
             $table->timestamps();
+
+            $table->string('referral_source')->nullable();
         });
     }
 
@@ -36,6 +39,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('businesses');
+        Schema::dropIfExists('business');
     }
 };

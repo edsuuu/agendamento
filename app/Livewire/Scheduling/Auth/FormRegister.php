@@ -27,8 +27,6 @@ class FormRegister extends Component
         $validatedData = $this->validate([
             'formData.firstName' => 'required|string|min:3|max:255',
             'formData.lastName' => 'nullable|string|min:3|max:255',
-            'formData.nameBusiness' => 'required|string|min:3|max:50',
-            'formData.phone' => 'required',
             'formData.email' => 'required|email:rfc,dns|unique:users,email',
             'formData.password' => 'required|min:6',
         ], [
@@ -40,8 +38,6 @@ class FormRegister extends Component
         ], [
             'formData.firstName' => 'Nome',
             'formData.lastName' => 'Sobrenome',
-            'formData.nameBusiness' => 'Nome da Empresa',
-            'formData.phone' => 'Telefone',
             'formData.email' => 'E-mail',
             'formData.password' => 'Senha',
         ]);
@@ -53,26 +49,18 @@ class FormRegister extends Component
 				'first_name' => $validatedData['formData']['firstName'],
 				'last_name' => $validatedData['formData']['lastName'],
 				'email' => $validatedData['formData']['email'],
-				'phone' => '+55 ' . $validatedData['formData']['phone'],
 				'password' => Hash::make($validatedData['formData']['password']),
 				'role' => 'customer',
 			]);
-
-			Business::create([
-			'name' => $validatedData['formData']['nameBusiness'],
-			'user_id' => $user->getAttributes()['id']
-            ]);
 
             DB::commit();
 
             Auth::login($user);
 
             if(Auth::check()){
-                sleep(1);
-                return redirect()->route('business.profile-complete');
+                return redirect()->route('complete-profile');
             }
 
-            session()->flash('error', 'Erro ao autenticar usuário.');
             return redirect()->route('login');
         } catch (\Exception $e) {
             DB::rollBack();

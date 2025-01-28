@@ -18,15 +18,15 @@ class CheckIfUserHasBusiness
 	 */
 	public function handle(Request $request, Closure $next): Response
 	{
-		if (Auth::check()) {
-			$user = Auth::user();
-
-			$existingBusiness = Business::where('user_id', $user->id)->first();
-
-			if ($existingBusiness) {
-				return redirect()->route('dashboard');
-			}
-		}
+//		if (Auth::check()) {
+//			$user = Auth::user();
+//
+//			$existingBusiness = Business::where('user_id', $user->id)->first();
+//
+//			if ($existingBusiness) {
+//				return redirect()->route('dashboard');
+//			}
+//		}
 
 		return $next($request);
 	}

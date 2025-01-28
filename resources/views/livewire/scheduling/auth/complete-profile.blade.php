@@ -1,7 +1,9 @@
 <div class="flex h-content flex-1 overflow-y-hidden">
+    {{--    Lado esquerdo --}}
     <div class="w-full h-full bg-blue-black">
-        <div class="w-full flex flex-row">
-            <div class="bg-blue-black w-full flex flex-col justify-evenly">
+        <div class="w-full h-full flex flex-row">
+            <div class="bg-blue-black w-full h-full flex flex-col justify-evenly">
+
                 <div class="flex flex-col gap-4 justify-center items-center text-white">
                     <div>
                         <h1 class="text-3xl font-medium">Seja Bem vindo, {{ auth()->user()->first_name }} !</h1>
@@ -15,107 +17,265 @@
                         </p>
                     </div>
                 </div>
-                <ul class="space-y-4">
-                    <li class="text-white {{ $currentStep === 1 ? 'font-bold' : '' }}">Etapa 1: Informações Básicas</li>
-                    <li class="text-white {{ $currentStep === 2 ? 'font-bold' : '' }}">Etapa 2</li>
-                    <li class="text-white {{ $currentStep === 3 ? 'font-bold' : '' }}">Etapa 3</li>
-                    <li class="text-white {{ $currentStep === 4 ? 'font-bold' : '' }}">Etapa 4</li>
-                </ul>
-                <div
-                    class="flex flex-col md:flex-row items-center justify-center max-w-full md:w-[500px] mx-auto space-y-4 md:space-y-0 md:space-x-4">
-                    <div class="flex flex-col items-center text-center gap-1">
-                    <span
-                        class="flex items-center justify-center w-10 h-10 bg-white rounded-full dark:bg-blue-link shrink-0">
-                        <svg class="w-4 h-4 text-blue-link dark:text-white" aria-hidden="true"
-                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M1 5.917 5.724 10.5 15 1.5"/>
-                        </svg>
-                    </span>
-                        <p class="text-[14px] leading-4 text-white">Criando sua conta</p>
-                    </div>
-                    <li class="flex w-full items-center text-blue-link dark:text-blue-link after:content-[''] after:w-full after:h-0.5 after:border-b after:border-blue-link after:border-2 after:inline-block dark:after:text-blue-link">
-                    </li>
-                    <div class="flex flex-col items-center text-center gap-1">
-                    <span
-                        class="flex items-center justify-center w-10 h-10 bg-blue-link rounded-full  dark:bg-white shrink-0">
-                        <svg class="w-5 h-5 text-gray-500 dark:text-blue-link" aria-hidden="true"
-                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
-                            <path
-                                d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2ZM7 2h4v3H7V2Zm5.7 8.289-3.975 3.857a1 1 0 0 1-1.393 0L5.3 12.182a1.002 1.002 0 1 1 1.4-1.436l1.328 1.289 3.28-3.181a1 1 0 1 1 1.392 1.435Z"/>
-                        </svg>
-                    </span>
-                        <p class="text-[14px] leading-4 text-white">Completando seu perfil</p>
+
+                <div class="flex flex-col items-center justify-center">
+                    <div class="flex gap-10">
+                        <!-- Etapa 1 -->
+                        <div class="flex flex-col items-center">
+                            <div class="relative">
+                                <div class="w-8 h-8 rounded-full flex items-center justify-center {{$currentStep >= 1 ? 'bg-blue-500' : '' }}  text-white font-bold">
+                                    1
+                                </div>
+                            </div>
+                            <span class="mt-2 text-white {{ $currentStep === 1 ? 'font-bold' : '' }}">Informações Básicas</span>
+                        </div>
+
+                        <!-- Etapa 2 -->
+                        <div class="flex flex-col items-center">
+                            <div class="relative">
+                                <div class="w-8 h-8 rounded-full flex items-center justify-center {{$currentStep >= 2 ? 'bg-blue-500' : '' }}  text-white font-bold">
+                                    2
+                                </div>
+                            </div>
+                            <span class="mt-2 text-white {{ $currentStep === 2 ? 'font-bold' : '' }}">Segmento de Atuação</span>
+                        </div>
+
+                        <!-- Etapa 3 -->
+                        <div class="flex flex-col items-center">
+                            <div class="relative">
+                                <div class="w-8 h-8 rounded-full flex items-center justify-center {{$currentStep >= 3 ? 'bg-blue-500' : '' }}  text-white font-bold">
+                                    3
+                                </div>
+                            </div>
+                            <span class="mt-2 text-white {{ $currentStep === 3 ? 'font-bold' : '' }}">Etapa 3</span>
+                        </div>
+
+                        <!-- Etapa 4 -->
+                        <div class="flex flex-col items-center">
+                            <div class="relative">
+                                <div class="w-8 h-8 rounded-full flex items-center justify-center {{$currentStep >= 4 ? 'bg-blue-500' : '' }}  text-white font-bold">
+                                    4
+                                </div>
+                            </div>
+                            <span class="mt-2 text-white {{ $currentStep === 4 ? 'font-bold' : '' }}">Etapa 4</span>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
+
     <div class="w-full h-full">
         @if ($currentStep === 1)
             <div class="h-full flex flex-col max-w-2xl m-auto gap-7">
                 <div class="mt-28">
-                    <h1 class="font-bold text-2xl">Com qual perfil você se encaixa</h1>
-                    <p>Para começar, é importante que você escolha o modelo que mais se encaixa ao seu negócio</p>
+                    <h1 class="font-bold text-2xl">Para começar, Precisamos de algumas informações</h1>
+                    <p>Algumas informações para começar</p>
                 </div>
-                <div class="border border-black w-full grid grid-cols-2 gap-4">
-                    <div class="border border-black">
-                        <h1>Trabalho sozinho</h1>
-                        <p>Nao tenho funcionarios</p>
-                    </div>
-                    <div class="border border-black">
-                        <h1>Micro Empresa</h1>
-                        <p>Entre 1 a 4 funcionarios</p>
-                    </div>
-                    <div class="border border-black">
-                        <h1>Pequena empresa</h1>
-                        <p>Entre 4 a 10 funcionaarios</p>
-                    </div>
-                    <div class="border border-black">
-                        <h1>Media ou grande empresa</h1>
-                        <p>Acima de 10 funcionarios</p>
-                    </div>
-                    <div class="border border-black">
-                        <h1>Rede ou franquia</h1>
-                        <p>Sou uma rede ou franquia</p>
-                    </div>
-                </div>
-                <div>
-                    <h1>Onde nos conheceu ?</h1>
-                    <select name="" id="">
-                        <option>Google</option>
-                        <option>Instagram</option>
-                        <option>Facebook</option>
-                        <option>Amigo</option>
-                        <option>Anuncio</option>
-                    </select>
 
-                </div>
-                <div class="w-full">
-                    <button
-                        class="bg-blue-black w-full text-center rounded-[5px] p-3 text-white font-medium text-[16px] cursor-pointer"
-                        wire:click="nextStep"
-                        class="btn btn-secondary"
-                        {{ $currentStep === 4 ? 'disabled' : '' }}>
-                        Continuar
-                    </button>
-                </div>
+                <form class="flex flex-col gap-4" wire:submit.prevent="saveInitial">
+                    @csrf
+                    <div class="text-black flex flex-col gap-0.5">
+                        <p class="text-gray-700 text-[14px] font-medium">Nome do seu comercio *</p>
+                        <input type="text" name="nameBusiness" placeholder="Como você chama seu comercio"
+                               wire:model.defer="nameBusiness"
+                               class="border border-gray-300 outline-none p-2 pl-3 rounded focus:border-blue-link invalid:border-red-500"
+                               minlength="3" maxlength="30">
+                        @error('nameBusiness')
+                        <span class="text-red-500 text-[13px]">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="text-black flex flex-col gap-0.5">
+                        <p class="text-gray-700 text-[14px] font-medium">Celular *</p>
+
+                        <input type="tel" id="phone" wire:model.defer="phone"
+                               class="border border-gray-300 outline-none p-2 pl-3 rounded focus:border-blue-link invalid:border-red-500 w-full"
+                               placeholder="(99) 99999-9999" maxlength="15" x-mask:dynamic="maskPhone"/>
+                        @error('phone')
+                        <span class="text-red-500 text-[13px]">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="flex flex-row gap-4 w-full">
+                        <div class="text-black flex flex-col gap-0.5">
+                            <p class="text-gray-700 text-[14px] font-medium">CEP *</p>
+
+                            <input type="tel" id="phone" wire:model.blur="zipCode"
+                                   class="border border-gray-300 outline-none p-2 pl-3 rounded focus:border-blue-link invalid:border-red-500 w-full"
+                                   placeholder="99999-999" maxlength="9" x-mask="99999-999"/>
+                            @error('zipCode')
+                            <span class="text-red-500 text-[13px]">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="text-black flex flex-col gap-0.5 w-full">
+                            <p class="text-gray-700 text-[14px] font-medium">Endereço *</p>
+
+                            <input type="tel" id="phone" wire:model.defer="address"
+                                   class="border border-gray-300 outline-none p-2 pl-3 rounded focus:border-blue-link invalid:border-red-500 w-full"
+                                   placeholder="Endereço"/>
+                            @error('address')
+                            <span class="text-red-500 text-[13px]">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="text-black flex flex-col gap-0.5">
+                            <p class="text-gray-700 text-[14px] font-medium">Número *</p>
+
+                            <input type="tel" id="phone" wire:model="number"
+                                   class="border border-gray-300 outline-none p-2 pl-3 rounded focus:border-blue-link invalid:border-red-500 w-full"
+                                   placeholder="1234"/>
+                            @error('number')
+                            <span class="text-red-500 text-[13px]">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="flex flex-row gap-4 w-full">
+                        <div class="text-black flex flex-col gap-0.5">
+                            <p class="text-gray-700 text-[14px] font-medium">Cidade *</p>
+
+                            <input type="tel" id="phone" wire:model="city"
+                                   class="border border-gray-300 outline-none p-2 pl-3 rounded focus:border-blue-link invalid:border-red-500 w-full"
+                                   placeholder="Cidade"/>
+                            @error('city')
+                            <span class="text-red-500 text-[13px]">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="text-black flex flex-col gap-0.5 w-full">
+                            <p class="text-gray-700 text-[14px] font-medium">Bairro *</p>
+
+                            <input type="tel" id="phone" wire:model="neighborhood"
+                                   class="border border-gray-300 outline-none p-2 pl-3 rounded focus:border-blue-link invalid:border-red-500 w-full"
+                                   placeholder="Bairro"
+                            @error('neighborhood')
+                            <span class="text-red-500 text-[13px]">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="text-black flex flex-col gap-0.5 ">
+                            <p class="text-gray-700 text-[14px] font-medium">Estado *</p>
+
+                            <input type="tel" id="phone" wire:model="state"
+                                   class="border border-gray-300 bg-gray-200 outline-none p-2 pl-3 rounded focus:border-blue-link invalid:border-red-500 w-full"
+                                   placeholder="Estado" disabled/>
+                            @error('state')
+                            <span class="text-red-500 text-[13px]">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="text-black flex flex-col gap-0.5">
+                        <p class="text-gray-700 text-[14px] font-medium">Onde nos conheceu ?</p>
+
+                        <select name="" wire:model="referralSource" class="border border-gray-300 outline-none p-2 pl-3 rounded focus:border-blue-link invalid:border-red-500 w-full">
+                            <option value="">Selecione</option>
+                            <option>Google</option>
+                            <option>Instagram</option>
+                            <option>Facebook</option>
+                            <option>Amigo</option>
+                            <option>Anuncio</option>
+                        </select>
+                        @error('referralSource')
+                        <span class="text-red-500 text-[13px]">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="w-full">
+                        <button
+                            class="bg-blue-black w-full text-center rounded-[5px] p-3 text-white font-medium text-[16px] cursor-pointer"
+                            wire:click="saveInitial"
+                            class="btn btn-secondary"
+                            {{ $currentStep === 4 ? 'disabled' : '' }}>
+                            Continuar
+                        </button>
+                    </div>
+
+                </form>
+
+{{--                <div class="border border-black w-full grid grid-cols-2 gap-4">--}}
+{{--                    <div class="border border-black">--}}
+{{--                        <h1>Trabalho sozinho</h1>--}}
+{{--                        <p>Nao tenho funcionarios</p>--}}
+{{--                    </div>--}}
+{{--                    <div class="border border-black">--}}
+{{--                        <h1>Micro Empresa</h1>--}}
+{{--                        <p>Entre 1 a 4 funcionarios</p>--}}
+{{--                    </div>--}}
+{{--                    <div class="border border-black">--}}
+{{--                        <h1>Pequena empresa</h1>--}}
+{{--                        <p>Entre 4 a 10 funcionaarios</p>--}}
+{{--                    </div>--}}
+{{--                    <div class="border border-black">--}}
+{{--                        <h1>Media ou grande empresa</h1>--}}
+{{--                        <p>Acima de 10 funcionarios</p>--}}
+{{--                    </div>--}}
+{{--                    <div class="border border-black">--}}
+{{--                        <h1>Rede ou franquia</h1>--}}
+{{--                        <p>Sou uma rede ou franquia</p>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+
+
+
+
             </div>
         @elseif ($currentStep === 2)
-            <div>
-                Etapa 2: Informações de Contato
-                <button
-                    wire:click="previousStep"
-                    class="btn btn-secondary"
-                    {{ $currentStep === 1 ? 'disabled' : '' }}>
-                    Voltar
-                </button>
-                <button
-                    wire:click="nextStep"
-                    class="bg-gray-600"
-                    {{ $currentStep === 4 ? 'disabled' : '' }}>
-                    Continuar
-                </button>
+            <div class="h-full flex flex-col max-w-2xl m-auto gap-7">
+                <div class="mt-28">
+                    <h1 class="font-bold text-2xl">Segmento de Atuação</h1>
+                    <p>Algumas informações para começar</p>
+                </div>
+
+                <form class="flex flex-col gap-4" wire:submit.prevent="saveInitial123">
+                    @csrf
+                    <div class="text-black flex flex-col gap-0.5">
+                        <p class="text-gray-700 text-[14px] font-medium">Nome do seu comercio *</p>
+                        <input type="text" name="nameBusiness" placeholder="Como você chama seu comercio"
+                               wire:model.defer="nameBusiness"
+                               class="border border-gray-300 outline-none p-2 pl-3 rounded focus:border-blue-link invalid:border-red-500"
+                               minlength="3" maxlength="30">
+                        @error('nameBusiness')
+                        <span class="text-red-500 text-[13px]">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="w-full">
+                        <button
+                            class="bg-blue-black w-full text-center rounded-[5px] p-3 text-white font-medium text-[16px] cursor-pointer"
+                            wire:click="saveInitial123"
+                            class="btn btn-secondary"
+                            {{ $currentStep === 4 ? 'disabled' : '' }}>
+                            Continuar
+                        </button>
+                    </div>
+
+                </form>
+
+                {{--                <div class="border border-black w-full grid grid-cols-2 gap-4">--}}
+                {{--                    <div class="border border-black">--}}
+                {{--                        <h1>Trabalho sozinho</h1>--}}
+                {{--                        <p>Nao tenho funcionarios</p>--}}
+                {{--                    </div>--}}
+                {{--                    <div class="border border-black">--}}
+                {{--                        <h1>Micro Empresa</h1>--}}
+                {{--                        <p>Entre 1 a 4 funcionarios</p>--}}
+                {{--                    </div>--}}
+                {{--                    <div class="border border-black">--}}
+                {{--                        <h1>Pequena empresa</h1>--}}
+                {{--                        <p>Entre 4 a 10 funcionaarios</p>--}}
+                {{--                    </div>--}}
+                {{--                    <div class="border border-black">--}}
+                {{--                        <h1>Media ou grande empresa</h1>--}}
+                {{--                        <p>Acima de 10 funcionarios</p>--}}
+                {{--                    </div>--}}
+                {{--                    <div class="border border-black">--}}
+                {{--                        <h1>Rede ou franquia</h1>--}}
+                {{--                        <p>Sou uma rede ou franquia</p>--}}
+                {{--                    </div>--}}
+                {{--                </div>--}}
+
+
+
+
             </div>
         @elseif ($currentStep === 3)
             <div>
@@ -153,3 +313,9 @@
     </div>
 </div>
 
+<script>
+    function maskPhone(value) {
+        return value.replace(/[^0-9]/g, '').length > 10 ? '(99) 99999-9999' : '(99) 9999-9999';
+    }
+
+</script>

@@ -19,7 +19,7 @@
     @if(auth()->check())
         <div class="flex flex-row gap-2">
             @if(auth()->user()->role === 'customer')
-                @if(auth()->user()->business || auth()->user()->role === 'admin')
+                @if((auth()->user()->business || auth()->user()->role === 'admin') && !request()->is('complete-profile'))
                     <h1><a href="{{ route('dashboard') }}">Dashboard</a></h1>
                 @else
                   <h1><a href="{{ route('complete-profile') }}">Complete seu Cadastro</a></h1>

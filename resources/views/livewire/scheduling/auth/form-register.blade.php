@@ -40,30 +40,7 @@
                 <span class="text-red-500 text-[13px]">{{ $message }}</span>
                 @enderror
             </div>
-            <div class="text-black flex flex-col gap-0.5">
-                <p class="text-gray-700 text-[14px] font-medium">Nome do seu negócio *</p>
-                <input type="text" name="nameBusiness" placeholder="Como você chama seu negócio"
-                       wire:model.defer="formData.nameBusiness"
-                       wire:change="handleChange('formData.nameBusiness')"
-                       class="border border-gray-300 outline-none p-2 pl-3 rounded focus:border-blue-link invalid:border-red-500"
-                       minlength="3" maxlength="30">
-                @error('formData.nameBusiness')
-                <span class="text-red-500 text-[13px]">{{ $message }}</span>
-                @enderror
-            </div>
-            <div class="text-black flex flex-col gap-0.5">
-                <p class="text-gray-700 text-[14px] font-medium">Celular *</p>
 
-                <input type="tel" id="phone" wire:model.defer="formData.phone"
-                       wire:change="handleChange('formData.phone')"
-                       class="border border-gray-300 outline-none p-2 pl-3 rounded focus:border-blue-link invalid:border-red-500 w-full"
-                       placeholder="(99) 99999-9999" maxlength="15" x-mask:dynamic="maskPhone"/>
-                @error('formData.phone')
-                <span class="text-red-500 text-[13px]">{{ $message }}</span>
-                @enderror
-
-
-            </div>
             <div class="text-black flex flex-col gap-0.5">
                 <p class="text-gray-700 text-[14px] font-medium">Seu e-mail *</p>
                 <input type="email" name="email" placeholder="Digite o seu email"
@@ -165,9 +142,6 @@
 </div>
 
 <script>
-    function maskPhone(value) {
-        return value.replace(/[^0-9]/g, '').length > 10 ? '(99) 99999-9999' : '(99) 9999-9999';
-    }
 
     function activeSpinner() {
         document.getElementById('loading-text').classList.add('hidden');

@@ -21,7 +21,7 @@ return new class extends Migration
 
             $table->foreignId('procedure_category_id')->nullable()->constrained('procedure_categories')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->foreignId('business_id')->constrained('businesses')->onDelete('cascade')
+            $table->foreignId('business_id')->constrained('business')->onDelete('cascade')
 	            ->onUpdate('cascade');
 
             $table->timestamps();
