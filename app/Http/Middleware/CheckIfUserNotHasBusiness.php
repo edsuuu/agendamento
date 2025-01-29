@@ -30,6 +30,7 @@ class CheckIfUserNotHasBusiness
                     'state',
                     'zip',
                     'referral_source',
+                    'segment_id',
                 ];
 
                 foreach ($array as $field) {

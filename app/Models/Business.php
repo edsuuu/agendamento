@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use OwenIt\Auditing\Contracts\Auditable;
 class Business extends Model implements Auditable
 {
@@ -13,7 +15,7 @@ class Business extends Model implements Auditable
     protected $fillable = [
         'name',
         'user_id',
-        'segment_type_id',
+        'segment_id',
         'documents',
         'address',
         'number_address',
@@ -24,4 +26,19 @@ class Business extends Model implements Auditable
         'referral_source',
         'neighborhood'
     ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function segment(): BelongsTo
+    {
+        return $this->belongsTo(Segments::class);
+    }
+
+    public function hoursWeeks(): HasMany
+    {
+        return $this->hasMany(HoursWeeks::class);
+    }
 }

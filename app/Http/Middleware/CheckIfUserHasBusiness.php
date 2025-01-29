@@ -16,18 +16,35 @@ class CheckIfUserHasBusiness
 	 *
 	 * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
 	 */
-	public function handle(Request $request, Closure $next): Response
-	{
-//		if (Auth::check()) {
-//			$user = Auth::user();
-//
-//			$existingBusiness = Business::where('user_id', $user->id)->first();
-//
-//			if ($existingBusiness) {
-//				return redirect()->route('dashboard');
-//			}
-//		}
+    public function handle(Request $request, Closure $next): Response
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
 
-		return $next($request);
-	}
+            if($user->role === 'admin') {
+                return $next($request);
+            }
+
+            $existingBusiness = Business::where('user_id', $user->id)->first();
+
+            if ($existingBusiness) {
+                $validNullFields = ['documents', 'photo'];
+                $invalidFields = [];
+
+                foreach ($existingBusiness->toArray() as $key => $value) {
+                    if (is_null($value) && !in_array($key, $validNullFields)) {
+                        $invalidFields[] = $key;
+                    }
+                }
+
+                if (count($invalidFields) > 0) {
+                    return redirect()->route('complete-profile');
+                }
+
+                return redirect()->route('dashboard');
+            }
+        }
+
+        return $next($request);
+    }
 }
