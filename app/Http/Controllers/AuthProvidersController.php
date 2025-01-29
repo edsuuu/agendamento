@@ -66,9 +66,11 @@ class AuthProvidersController extends Controller
             return redirect('dashboard');
         }  catch (ClientException $e) {
             DB::rollBack();
+            \Log::error($e);
             return redirect()->route('login')->withErrors(['google' => 'Erro ao autenticar com Google. Por favor, tente novamente.']);
         } catch (\Exception $e) {
             DB::rollBack();
+            \Log::error($e);
             return redirect()->route('login')->withErrors(['error' => 'Ocorreu um erro inesperado. Tente novamente.']);
         }
     }

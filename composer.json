@@ -10,6 +10,7 @@
         "laravel/socialite": "^5.16",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
+        "opcodesio/log-viewer": "^3.14",
         "owen-it/laravel-auditing": "^13.6"
     },
     "require-dev": {
