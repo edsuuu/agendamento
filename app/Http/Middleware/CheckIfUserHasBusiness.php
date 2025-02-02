@@ -7,6 +7,7 @@ use Closure;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Response;
 
 class CheckIfUserHasBusiness
@@ -37,11 +38,9 @@ class CheckIfUserHasBusiness
                     }
                 }
 
-                if (count($invalidFields) > 0) {
+                if (count($invalidFields) > 0 && !Route::is('complete-profile')) {
                     return redirect()->route('complete-profile');
                 }
-
-                return redirect()->route('dashboard');
             }
         }
 
