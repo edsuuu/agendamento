@@ -35,3 +35,9 @@ Route::middleware(['auth', CheckIfUserHasBusiness::class])->get('/complete-profi
 Route::middleware(['auth', CheckIfUserNotHasBusiness::class])->group(function () {
     Route::view('/dashboard', 'scheduling.dashboard.dashboard')->name('dashboard');
 });
+
+Route::middleware('auth')->group(function () {
+    Route::view('scheduling', 'scheduling.scheduling')->name('scheduling');
+    Route::view('products', 'scheduling.catalog.products')->name('products');
+    Route::view('procedures', 'scheduling.catalog.procedures')->name('procedures');
+});
