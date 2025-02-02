@@ -16,7 +16,7 @@
 {{-- Modais importa aq  e scripts  --}}
 
 @if(Auth::check() && !request()->is('/', 'complete-profile'))
-    <div class="w-full h-full flex flex-row border border-black">
+    <div class="w-full h-full flex flex-row">
         <x-navbar-auth>
             <main>
                 {{ $slot }}

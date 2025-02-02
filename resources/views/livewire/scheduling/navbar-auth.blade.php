@@ -25,8 +25,7 @@
 
     {{--MENU LATERAL --}}
 
-    <aside
-        class="fixed top-0 left-0 z-40 w-52 h-screen pt-16 bg-blue-black border-r transition-transform sm:translate-x-0 -translate-x-full ">
+    <aside class="fixed top-0 left-0 z-40 w-52 h-screen pt-14 bg-blue-black border-r transition-transform sm:translate-x-0 -translate-x-full ">
         <div class="flex flex-col h-full">
             <div class="flex flex-row gap-5 p-4 items-center text-white bg-blue-400 rounded-lg m-2">
                 <div class="bg-gray-50 rounded-full w-10 h-10"></div>
