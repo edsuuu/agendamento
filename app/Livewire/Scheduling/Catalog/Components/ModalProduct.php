@@ -30,7 +30,6 @@ class  ModalProduct extends Component
 
     }
 
-
     public function render()
     {
         return view('livewire.scheduling.catalog.components.modal-product');

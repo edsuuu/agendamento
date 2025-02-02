@@ -10,8 +10,6 @@
 
     </div>
 
-
-
     @if($openModal)
        <livewire:scheduling.catalog.components.modal-product :id="1" />
     @endif
