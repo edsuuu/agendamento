@@ -53,5 +53,18 @@
     //     loadUtilsOnInit: "https://cdn.jsdelivr.net/npm/intl-tel-input@24.7.0/build/js/utils.js",
     // });
 
+    function formatMoney(value, maxInt) {
+        if (value || Number.isInteger(value)) {
+            const cleanValue = value.toString().replace(/[^\d]/g, '');
+
+            const limitedValue = cleanValue.slice(0, maxInt);
+
+            return limitedValue
+                .replace(/(\d{1,})(\d{2})$/, '$1,$2')
+                .replace(/(?=(\d{3})+(\D))\B/g, '.');
+        }
+        return '';
+    }
+
 </script>
 </html>

@@ -41,4 +41,8 @@ class Business extends Model implements Auditable
     {
         return $this->hasMany(HoursWeeks::class);
     }
+    public function products(): HasMany
+    {
+        return $this->hasMany(Products::class);
+    }
 }
