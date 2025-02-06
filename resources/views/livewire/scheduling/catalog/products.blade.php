@@ -17,7 +17,6 @@
 
     </div>
 
-
     @if ($viewCategory)
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-4">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -64,7 +63,7 @@
     @else
         <div class="">
             <div class="w-full bg-gray-300 flex flex-row justify-between">
-                <input type="search"/>
+                <input type="search" placeholder="Pesquisar Nome" wire:model.blur.change="searchProduct"/>
             </div>
 
             {{--        <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-4">--}}

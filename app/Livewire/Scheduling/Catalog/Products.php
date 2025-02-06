@@ -17,7 +17,7 @@ class Products extends Component
     ];
 
     public $openModal = false, $openModalCategory = false, $viewCategory = false;
-    public $selectedProductForEdit, $selectedProductForDelete, $selectedCategoryForEdit, $selectedCategoryForDelete;
+    public $selectedProductForEdit, $selectedProductForDelete, $selectedCategoryForEdit, $selectedCategoryForDelete, $searchProduct;
 
 
     #[On('closeModalProduct')]
@@ -71,11 +71,19 @@ class Products extends Component
 
     public function render()
     {
-        $products = ProductsBusiness::query()
+        $productsQuery = ProductsBusiness::query()
             ->with('category')
             ->where('business_id', auth()->user()->business->id)
-            ->orderBy('name', 'ASC')
-            ->paginate(10);
+            ->orderBy('name', 'ASC');
+
+        if ($this->searchProduct) {
+            $productsQuery->where(function ($query) {
+                $query->where('name', 'LIKE', '%' . $this->searchProduct . '%');
+            });
+        }
+
+        $products= $productsQuery->paginate(10);
+
 
         $categories = ProductCategory::query()
             ->where('business_id', auth()->user()->business->id)
