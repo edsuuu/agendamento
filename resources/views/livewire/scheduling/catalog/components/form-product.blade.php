@@ -43,8 +43,7 @@
                     <p class="text-gray-700 text-[14px] font-medium">Quantidade</p>
                     <input type="number" name="quantidade" placeholder="Quantidade"
                            wire:model="quantity"
-                           class="border border-gray-300 outline-none p-2 pl-3 rounded focus:border-blue-link  @error('name') border-red-500 @enderror"
-                           maxlength="5" min="0">
+                           class="border border-gray-300 outline-none p-2 pl-3 rounded focus:border-blue-link  @error('quantity') border-red-500 @enderror" min="0"   oninput="if (this.value.length > 7) this.value = this.value.slice(0, 7);">
                     @error('quantity')
                     <span class="text-red-500 text-[13px]">{{ $message }}</span>
                     @enderror
@@ -79,13 +78,11 @@
                 </button>
             </form>
         @else
-            <div>
-                <button wire:click="deleteProduct({{$idDelete}})" class="bg-red-500 text-white rounded">
-                    Sim
-                </button>
-                <button wire:click="closeModal" class="bg-red-500 text-white rounded">
-                    Não
-                </button>
+            <h2 class="font-semibold text-sm text-black mt-1 leading-tight">Deseja mesmo apagar esse produto ?</h2>
+
+            <div class="w-full p-2 justify-center items-center">
+                <button class="border border-gray-200 rounded-lg bg-red-500 text-white font-semibold px-5 py-1" wire:click="deleteProduct">Sim</button>
+                <button class="border border-gray-500 bg-gray-200 rounded-lg text-black font-semibold px-5 py-1" wire:click="$dispatch('close-side-modal2')">Não</button>
             </div>
         @endif
     </div>

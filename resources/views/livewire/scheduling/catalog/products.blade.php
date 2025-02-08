@@ -13,91 +13,49 @@
 
     </div>
 
-    <div class="">
-        <div class="w-full bg-gray-300 flex flex-row justify-between">
-            <input type="search" placeholder="Pesquisar Nome" wire:model.blur.change="searchProduct"/>
+    <div>
+        <div class="text-black flex flex-col gap-0.5 mt-2 w-[300px]">
+            <input type="search" name="search" placeholder="Nome da categoria"
+                   wire:model.change.blur="searchProduct"
+                   class="border border-gray-300 outline-none p-2 pl-3 rounded focus:border-blue-link"
+                   maxlength="20">
         </div>
 
-        {{--        <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-4">--}}
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="px-6 py-3">
-                    Nome
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    <div class="flex items-center">
-                        Preço
-                        <a href="#">
-                            <svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                 fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    <div class="flex items-center">
-                        Quantidade
-                        <a href="#">
-                            <svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                 fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    <div class="flex items-center">
-                        Categoria
-                        <a href="#">
-                            <svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                 fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    <div class="flex items-center">
-                        Ação
-                    </div>
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($products as $product)
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{ $product->name }}
-                    </th>
-                    <td class="px-6 py-4">
-                        R$ {{ number_format($product->price, 2,  ',' , '.') }}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{ $product->quantity }}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{$product->category->name ?? ''}}
-                    </td>
-                    <td class="px-6 py-4 ">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                           wire:click.prevent="openAndCloseModal({{ $product->id }})">Editar</a>
-                        <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline"
-                           wire:click.prevent="openAndCloseModal(null , {{$product->id}})">Apagar</a>
-                    </td>
-                </tr>
-            @endforeach
 
+        <div class="shadow-lg sm:rounded-lg mt-5 bg-white">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                <thead class="border-b p-2 ">
+                <th class="text-left p-2 pl-4">ID</th>
+                <th class="text-center p-2 pl-4">Nome</th>
+                <th class="text-center p-2">Preço</th>
+                <th class="text-center p-2">Quantidade</th>
+                <th class="text-center p-2">Categoria</th>
+                <th class="text-center  p-2">Ação</th>
+                </thead>
+                <tbody>
+                @foreach($products as $product)
+                    <tr class="even:bg-gray-100 p-2">
+                        <td class="text-left p-2 pl-4">{{$product->id}}</td>
+                        <td class="text-center p-2 pl-4">{{$product->name}}</td>
+                        <td class="text-center p-2 pl-4">R$ {{ number_format($product->price, 2,  ',' , '.') }}</td>
+                        <td class="text-center p-2 pl-4">{{$product->quantity ?? 0}}</td>
+                        <td class="text-center p-2 pl-4">{{$product->category->name ?? 'Sem Categoria'}}</td>
+                        <td class="text-center p-2 flex flex-row gap-2 justify-center">
+                            <a x-on:click="$dispatch('open-side-modal2', { componentName: 'scheduling.catalog.components.form-product', params: {'idProduct': {{$product->id}}}, events:[] })"
+                               class="w-full md:w-20 text-center cursor-pointer block px-2 py-1 text-xs bg-blue-black text-white rounded hover:bg-opacity-50 font-bold">Editar</a>
+                            <a x-on:click="$dispatch('open-side-modal2', { componentName: 'scheduling.catalog.components.form-product', params: {idProduct: null, idDelete: {{$product->id}} }, events:[] })"
+                               class="w-full md:w-20 text-center cursor-pointer block px-2 py-1 text-xs bg-red-500 text-white rounded hover:bg-opacity-50 font-bold">Apagar</a>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
 
-            </tbody>
-        </table>
         <div class="mt-2">
             {{ $products->links() }}
         </div>
+
     </div>
 
 
