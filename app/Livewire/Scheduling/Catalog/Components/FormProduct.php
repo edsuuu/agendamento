@@ -54,6 +54,7 @@ class FormProduct extends Component
             'categorySelect' => 'Categoria',
         ]);
 
+
         if ($this->id) {
             Products::query()->find($this->id)->update([
                 'name' => $this->name,
@@ -62,25 +63,23 @@ class FormProduct extends Component
                 'product_category_id' => (int)$validate['categorySelect'] ?? null,
             ]);
         } else {
-            Products::updateOrCreate(
-                ['id' => $this->id ?? null],
-                ['name' => $validate['name'], 'business_id' => auth()->user()->business->id],
+            Products::create(
                 [
+                    'name' => $validate['name'],
                     'price' => (float)str_replace(',', '.', str_replace('.', '', $validate['price'])),
                     'quantity' => $validate['quantity'],
-                    'product_category_id' => (int)$validate['categorySelect'] ?? null,
+                    'product_category_id' => $validate['categorySelect'] ?? null,
                     'business_id' => auth()->user()->business->id,
                 ]
             );
         }
 
         $this->dispatch('close-side-modal', ['events' => 'refreshNewProducts']);
-
     }
 
-    public function deleteProduct($id): void
+    public function deleteProduct(): void
     {
-        $prod = Products::query()->find($id)->delete();
+        $prod = Products::query()->find($this->idDelete)->delete();
 
         if ($prod) {
             $this->dispatch('close-side-modal2', ['events' => 'refreshNewProducts']);
