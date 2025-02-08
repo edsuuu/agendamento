@@ -4,11 +4,12 @@ namespace App\Livewire\Scheduling\Catalog\Components;
 
 use App\Models\ProductCategory;
 use App\Models\Products;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
-class  ModalProduct extends Component
+class FormProduct extends Component
 {
-    public $id, $name, $price, $quantity, $categorySelect, $idDelete;
+    public $id, $name, $price, $quantity = 1, $categorySelect, $idDelete;
     public $categories = [];
 
     public function mount($idProduct = null, $idDelete = null): void
@@ -19,7 +20,7 @@ class  ModalProduct extends Component
             $productById = Products::query()->find($idProduct);
 
             $this->name = $productById->name;
-            $this->price = number_format($productById->price, 2,  ',' , '.');
+            $this->price = number_format($productById->price, 2, ',', '.');
             $this->quantity = $productById->quantity;
             $this->categorySelect = $productById->product_category_id;
         }
@@ -28,12 +29,13 @@ class  ModalProduct extends Component
             $this->idDelete = $idDelete;
         }
 
-        $this->categories = ProductCategory::query()->where('business_id', auth()->user()->business->id)->get();
+        $this->refreshCategory();
     }
 
-    public function closeModal(): void
+    #[On('refreshCategoryFormProduct')]
+    public function refreshCategory(): void
     {
-        $this->dispatch('closeModalProduct');
+        $this->categories = ProductCategory::query()->where('business_id', auth()->user()->business->id)->get();
     }
 
     public function save(): void
@@ -72,15 +74,8 @@ class  ModalProduct extends Component
             );
         }
 
-        $this->closeModal();
-        $this->dispatch('refreshNewProducts');
-    }
+        $this->dispatch('close-side-modal', ['events' => 'refreshNewProducts']);
 
-    public function createNewCategory(): void
-    {
-        $this->closeModal();
-
-        $this->dispatch('openModalCategory');
     }
 
     public function deleteProduct($id): void
@@ -88,13 +83,12 @@ class  ModalProduct extends Component
         $prod = Products::query()->find($id)->delete();
 
         if ($prod) {
-            $this->closeModal();
-            $this->dispatch('refreshNewProducts');
+            $this->dispatch('close-side-modal2', ['events' => 'refreshNewProducts']);
         }
     }
 
     public function render()
     {
-        return view('livewire.scheduling.catalog.components.modal-product');
+        return view('livewire.scheduling.catalog.components.form-product');
     }
 }

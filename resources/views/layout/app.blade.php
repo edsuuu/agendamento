@@ -12,7 +12,8 @@
     @livewireStyles
 </head>
 <body>
-
+@livewire('sideModal')
+@livewire('sideModal2')
 {{-- Modais importa aq  e scripts  --}}
 
 @if(Auth::check() && !request()->is('/', 'complete-profile'))

@@ -85,15 +85,8 @@ class Products extends Component
         $products= $productsQuery->paginate(10);
 
 
-        $categories = ProductCategory::query()
-            ->where('business_id', auth()->user()->business->id)
-            ->orderBy('name', 'ASC')
-            ->paginate(10);
-
-
         return view('livewire.scheduling.catalog.products', [
             'products' => $products,
-            'categories' => $categories,
         ]);
     }
 }
