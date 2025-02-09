@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Livewire\Scheduling\Catalog\Components\Product;
+namespace App\Livewire\Scheduling\Catalog\Components\Procedure;
 
-use App\Models\ProductCategory;
+use App\Models\ProcedureCategory;
 use Livewire\Component;
 
 class FormCategory extends Component
@@ -14,7 +14,7 @@ class FormCategory extends Component
         if ($categoryId) {
             $this->idCategory = $categoryId;
 
-            $this->name = ProductCategory::query()->find($categoryId)->name;
+            $this->name = ProcedureCategory::query()->find($categoryId)->name;
         }
 
         if ($categoryIdDelete) {
@@ -34,13 +34,13 @@ class FormCategory extends Component
         ]);
 
         if ($this->idCategory) {
-            ProductCategory::where('id', $this->idCategory)
+            ProcedureCategory::where('id', $this->idCategory)
                 ->where('business_id', auth()->user()->business->id)
                 ->update([
                     'name' => $validate['name'],
                 ]);
         } else {
-            ProductCategory::updateOrCreate(
+            ProcedureCategory::updateOrCreate(
                 [
                     'name' => $validate['name'],
                     'business_id' => auth()->user()->business->id
@@ -51,29 +51,30 @@ class FormCategory extends Component
             );
         }
 
-        $this->dispatch('refreshCategoryFormProduct');
-        $this->dispatch('close-side-modal2', ['events' => 'refreshNewCategory']);
+        $this->dispatch('refreshCategoryFormProcedure');
+        $this->dispatch('close-side-modal2', ['events' => 'refreshNewCategoryProcedure']);
     }
 
     public function deleteCategory(): void
     {
-        $haveProductsByCategory = ProductCategory::query()->with('products')->find($this->idCategoryDelete);
+        $haveProcedureByCategory = ProcedureCategory::query()->with('procedures')->find($this->idCategoryDelete);
 
-        if (isset($haveProductsByCategory->products)) {
-            if (count($haveProductsByCategory->products) >= 1) {
-                foreach ($haveProductsByCategory->products as $product) {
+        if (isset($haveProcedureByCategory->procedures)) {
+            if (count($haveProcedureByCategory->procedures) >= 1) {
+                foreach ($haveProcedureByCategory->procedures as $product) {
                     $product->update(['product_category_id' => null]);
                 }
             }
         }
 
-        $haveProductsByCategory->delete();
+        $haveProcedureByCategory->delete();
 
-        $this->dispatch('close-side-modal2', ['events' => 'refreshNewCategory']);
+        $this->dispatch('close-side-modal2', ['events' => 'refreshNewCategoryProcedure']);
     }
+
 
     public function render()
     {
-        return view('livewire.scheduling.catalog.components.product.form-category');
+        return view('livewire.scheduling.catalog.components.procedure.form-category');
     }
 }
