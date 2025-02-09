@@ -5,6 +5,7 @@ namespace App\Livewire\Scheduling\Catalog;
 use App\Models\ProcedureCategory;
 use App\Models\Procedures as ProceduresModel;
 use Carbon\Carbon;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Procedures extends Component
@@ -18,7 +19,14 @@ class Procedures extends Component
 
     public function mount()
     {
+        $this->refreshCategory();
+    }
+
+    #[On('refreshCategoryInScreenProcedure')]
+    public function refreshCategory()
+    {
         $this->categories = ProcedureCategory::query()->where('business_id', auth()->user()->business->id)->get();
+
     }
 
     public function render()
@@ -36,7 +44,7 @@ class Procedures extends Component
 
         if ($this->filterByCategory) {
             $proceduresQuery->where(function ($query) {
-                $query->where('product_category_id', $this->filterByCategory);
+                $query->where('procedure_category_id', $this->filterByCategory);
             });
         }
 

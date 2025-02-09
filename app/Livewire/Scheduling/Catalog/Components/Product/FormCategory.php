@@ -52,6 +52,7 @@ class FormCategory extends Component
         }
 
         $this->dispatch('refreshCategoryFormProduct');
+        $this->dispatch('refreshCategoryInScreenProducts');
         $this->dispatch('close-side-modal2', ['events' => 'refreshNewCategory']);
     }
 
