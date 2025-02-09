@@ -65,7 +65,7 @@
                 @else
                     <div class="flex flex-col gap-2">
                         <h1>Você ainda não tem categoria, Deseja criar ?</h1>
-                        <a x-on:click="$dispatch('open-side-modal2', { componentName: 'scheduling.catalog.components.form-category', params: {}, events:[] })"
+                        <a x-on:click="$dispatch('open-side-modal2', { componentName: 'scheduling.catalog.components.product.form-category', params: {}, events:[] })"
                            class="w-full md:w-40 text-center cursor-pointer block px-2 py-1 text-xs bg-blue-black text-white rounded hover:bg-opacity-50 font-bold active:scale-[0.99]">Criar nova Categoria</a>
                     </div>
                 @endif

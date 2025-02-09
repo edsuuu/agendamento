@@ -40,7 +40,7 @@ class Products extends Component
 
         if ($this->searchProduct) {
             $productsQuery->where(function ($query) {
-                $query->where('name', 'LIKE', '%' . $this->searchProduct . '%');
+                $query->where('name', 'LIKE', '%' . $this->searchProduct . '%')->orWhereRelation('category', 'name', 'LIKE', '%' . $this->searchProduct . '%');
             });
         }
 

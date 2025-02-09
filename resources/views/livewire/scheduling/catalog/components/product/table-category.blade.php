@@ -7,7 +7,7 @@
 
 
     <div class="flex flex-row justify-between">
-        <a x-on:click="$dispatch('open-side-modal2', { componentName: 'scheduling.catalog.components.form-category', params: {}, events:[] })"
+        <a x-on:click="$dispatch('open-side-modal2', { componentName: 'scheduling.catalog.components.product.form-category', params: {}, events:[] })"
            class="w-full md:w-40 text-center cursor-pointer block px-2 py-1 text-xs bg-blue-black text-white rounded hover:bg-opacity-50 font-bold active:scale-[0.99]">Criar
             nova Categoria</a>
     </div>
@@ -34,9 +34,9 @@
                     <td class="text-left p-2 pl-4">{{$category->name}}</td>
                     <td class="text-center p-2">{{$category->products->count()}}</td>
                     <td class="text-center p-2 flex flex-row gap-2 justify-center">
-                        <a x-on:click="$dispatch('open-side-modal2', { componentName: 'scheduling.catalog.components.form-category', params: {'categoryId': {{$category->id}}}, events:[] })"
+                        <a x-on:click="$dispatch('open-side-modal2', { componentName: 'scheduling.catalog.components.product.form-category', params: {'categoryId': {{$category->id}}}, events:[] })"
                            class="w-full md:w-20 text-center cursor-pointer block px-2 py-1 text-xs bg-blue-black text-white rounded hover:bg-opacity-50 font-bold">Editar</a>
-                        <a x-on:click="$dispatch('open-side-modal2', { componentName: 'scheduling.catalog.components.form-category', params: {categoryId: null, categoryIdDelete: {{$category->id}} }, events:[] })"
+                        <a x-on:click="$dispatch('open-side-modal2', { componentName: 'scheduling.catalog.components.product.form-category', params: {categoryId: null, categoryIdDelete: {{$category->id}} }, events:[] })"
                            class="w-full md:w-20 text-center cursor-pointer block px-2 py-1 text-xs bg-red-500 text-white rounded hover:bg-opacity-50 font-bold">Apagar</a>
                     </td>
                 </tr>

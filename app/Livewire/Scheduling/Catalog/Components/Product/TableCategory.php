@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Scheduling\Catalog\Components;
+namespace App\Livewire\Scheduling\Catalog\Components\Product;
 
 use App\Models\ProductCategory;
 use Livewire\Component;
@@ -33,7 +33,7 @@ class TableCategory extends Component
     {
         $categories = $this->getCategories()->paginate(13);
 
-        return view('livewire.scheduling.catalog.components.table-category', [
+        return view('livewire.scheduling.catalog.components.product.table-category', [
             'categories' => $categories,
         ]);
     }
