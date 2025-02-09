@@ -21,6 +21,12 @@ class Products extends Component
 
     public function mount()
     {
+        $this->resetPage();
+    }
+
+    #[On('refreshCategoryInScreenProducts')]
+    public function refreshCategory()
+    {
         $this->categories = ProductCategory::query()->where('business_id', auth()->user()->business->id)->get();
     }
 

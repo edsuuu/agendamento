@@ -56,7 +56,7 @@
                     <tr class="even:bg-gray-100 p-2">
                         <td class="text-left p-2 pl-4">{{$procedure->id}}</td>
                         <td class="text-center p-2 pl-4">{{$procedure->name}}</td>
-                        <td class="text-center p-2 pl-4">{{$procedure->description}}</td>
+                        <td class="text-center p-2 pl-4 truncate w-[200px] max-w-[200px] overflow-hidden">{{$procedure->description}}</td>
                         <td class="text-center p-2 pl-4">R$ {{ number_format($procedure->price, 2,  ',' , '.') }}</td>
                         <td class="text-center p-2 pl-4">{{$procedure->duration}}h</td>
                         <td class="text-center p-2 pl-4">{{$procedure->category->name ?? 'Sem Categoria'}}</td>
