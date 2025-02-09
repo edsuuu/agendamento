@@ -3,10 +3,10 @@
         <h1 class="text-2xl font-bold">Produtos</h1>
 
         <div class="flex flex-row gap-4 items-center">
-            <a x-on:click="$dispatch('open-side-modal', { componentName: 'scheduling.catalog.components.table-category', params: {}, events:[] })"
+            <a x-on:click="$dispatch('open-side-modal', { componentName: 'scheduling.catalog.components.product.table-category', params: {}, events:[] })"
                class="w-full md:w-32 text-center cursor-pointer block px-2 py-1 text-xs bg-blue-black text-white rounded hover:bg-opacity-50 font-bold active:scale-[0.99]">Ver
                 Categorias</a>
-            <a x-on:click="$dispatch('open-side-modal', { componentName: 'scheduling.catalog.components.form-product', params: {}, events:[] })"
+            <a x-on:click="$dispatch('open-side-modal', { componentName: 'scheduling.catalog.components.product.form-product', params: {}, events:[] })"
                class="w-full md:w-32 text-center cursor-pointer block px-2 py-1 text-xs bg-blue-black text-white rounded hover:bg-opacity-50 font-bold active:scale-[0.99]">Criar
                 Produto</a>
         </div>
@@ -18,7 +18,7 @@
         <div class="flex flex-row justify-between ">
             <div class="flex flex-row gap-2">
                 <div class="text-black flex flex-col text-[13px] w-[300px]">
-                    <input type="search" name="search" placeholder="Nome da categoria"
+                    <input type="search" name="search" placeholder="Nome do produto ou categoria"
                            wire:model.change.blur="searchProduct"
                            class="border border-gray-300 outline-none p-2 pl-3 rounded focus:border-blue-link"
                            maxlength="20">
@@ -60,9 +60,9 @@
                         <td class="text-center p-2 pl-4">{{$product->quantity ?? 0}}</td>
                         <td class="text-center p-2 pl-4">{{$product->category->name ?? 'Sem Categoria'}}</td>
                         <td class="text-center p-2 flex flex-row gap-2 justify-center">
-                            <a x-on:click="$dispatch('open-side-modal2', { componentName: 'scheduling.catalog.components.form-product', params: {'idProduct': {{$product->id}}}, events:[] })"
+                            <a x-on:click="$dispatch('open-side-modal2', { componentName: 'scheduling.catalog.components.product.form-product', params: {'idProduct': {{$product->id}}}, events:[] })"
                                class="w-full md:w-20 text-center cursor-pointer block px-2 py-1 text-xs bg-blue-black text-white rounded hover:bg-opacity-50 font-bold">Editar</a>
-                            <a x-on:click="$dispatch('open-side-modal2', { componentName: 'scheduling.catalog.components.form-product', params: {idProduct: null, idDelete: {{$product->id}} }, events:[] })"
+                            <a x-on:click="$dispatch('open-side-modal2', { componentName: 'scheduling.catalog.components.product.form-product', params: {idProduct: null, idDelete: {{$product->id}} }, events:[] })"
                                class="w-full md:w-20 text-center cursor-pointer block px-2 py-1 text-xs bg-red-500 text-white rounded hover:bg-opacity-50 font-bold">Apagar</a>
                         </td>
                     </tr>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Scheduling\Catalog\Components;
+namespace App\Livewire\Scheduling\Catalog\Components\Product;
 
 use App\Models\ProductCategory;
 use App\Models\Products;
@@ -89,6 +89,6 @@ class FormProduct extends Component
 
     public function render()
     {
-        return view('livewire.scheduling.catalog.components.form-product');
+        return view('livewire.scheduling.catalog.components.product.form-product');
     }
 }

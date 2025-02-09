@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Scheduling\Catalog\Components;
+namespace App\Livewire\Scheduling\Catalog\Components\Product;
 
 use App\Models\ProductCategory;
 use Livewire\Component;
@@ -74,6 +74,6 @@ class FormCategory extends Component
 
     public function render()
     {
-        return view('livewire.scheduling.catalog.components.form-category');
+        return view('livewire.scheduling.catalog.components.product.form-category');
     }
 }
