@@ -16,7 +16,6 @@ class Products extends Component
         'refreshNewProducts' => '$refresh',
     ];
 
-    public $openModal = false, $openModalCategory = false, $viewCategory = false;
     public $searchProduct, $filterByCategory;
     public $categories = [];
 
@@ -51,7 +50,6 @@ class Products extends Component
         }
 
         $products= $productsQuery->paginate(10);
-
 
         return view('livewire.scheduling.catalog.products', [
             'products' => $products,

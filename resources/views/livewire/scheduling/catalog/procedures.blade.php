@@ -3,14 +3,13 @@
         <h1 class="text-2xl font-bold">Procedimentos</h1>
 
         <div class="flex flex-row gap-4 items-center">
-            <a x-on:click="$dispatch('open-side-modal', { componentName: 'scheduling.catalog.components.product.table-category', params: {}, events:[] })"
+            <a x-on:click="$dispatch('open-side-modal', { componentName: 'scheduling.catalog.components.procedure.table-category', params: {}, events:[] })"
                class="w-full md:w-32 text-center cursor-pointer block px-2 py-1 text-xs bg-blue-black text-white rounded hover:bg-opacity-50 font-bold active:scale-[0.99]">Ver
                 Categorias</a>
-            <a x-on:click="$dispatch('open-side-modal', { componentName: 'scheduling.catalog.components.product.form-product', params: {}, events:[] })"
-               class="w-full md:w-32 text-center cursor-pointer block px-2 py-1 text-xs bg-blue-black text-white rounded hover:bg-opacity-50 font-bold active:scale-[0.99]">Criar
+            <a x-on:click="$dispatch('open-side-modal', { componentName: 'scheduling.catalog.components.procedure.form-procedure', params: {}, events:[] })"
+               class="w-full md:w-36 text-center cursor-pointer block px-2 py-1 text-xs bg-blue-black text-white rounded hover:bg-opacity-50 font-bold active:scale-[0.99]">Criar
                 Procedimento</a>
         </div>
-
     </div>
 
     <div>
@@ -29,9 +28,9 @@
                             class="border border-gray-300 outline-none p-2 pl-3 rounded focus:border-blue-link "
                             wire:model.change="filterByCategory">
                         <option value="">Filtro por Categoria</option>
-{{--                        @foreach($categories as $category)--}}
-{{--                            <option value="{{$category->id}}">{{$category->name}}</option>--}}
-{{--                        @endforeach--}}
+                        @foreach($categories as $category)
+                            <option value="{{$category->id}}">{{$category->name}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -44,29 +43,31 @@
         <div class="shadow-lg sm:rounded-lg mt-5 bg-white">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                 <thead class="border-b p-2 ">
-                <th class="text-left p-2 pl-4">ID</th>
+                <th class="text-left p-2 pl-4">Foto</th>
                 <th class="text-center p-2 pl-4">Nome</th>
+                <th class="text-center p-2">Descrição</th>
                 <th class="text-center p-2">Preço</th>
-                <th class="text-center p-2">Quantidade</th>
+                <th class="text-center p-2">Duração</th>
                 <th class="text-center p-2">Categoria</th>
                 <th class="text-center  p-2">Ação</th>
                 </thead>
                 <tbody>
-{{--                @foreach($products as $product)--}}
-{{--                    <tr class="even:bg-gray-100 p-2">--}}
-{{--                        <td class="text-left p-2 pl-4">{{$product->id}}</td>--}}
-{{--                        <td class="text-center p-2 pl-4">{{$product->name}}</td>--}}
-{{--                        <td class="text-center p-2 pl-4">R$ {{ number_format($product->price, 2,  ',' , '.') }}</td>--}}
-{{--                        <td class="text-center p-2 pl-4">{{$product->quantity ?? 0}}</td>--}}
-{{--                        <td class="text-center p-2 pl-4">{{$product->category->name ?? 'Sem Categoria'}}</td>--}}
-{{--                        <td class="text-center p-2 flex flex-row gap-2 justify-center">--}}
-{{--                            <a x-on:click="$dispatch('open-side-modal2', { componentName: 'scheduling.catalog.components.form-product', params: {'idProduct': {{$product->id}}}, events:[] })"--}}
-{{--                               class="w-full md:w-20 text-center cursor-pointer block px-2 py-1 text-xs bg-blue-black text-white rounded hover:bg-opacity-50 font-bold">Editar</a>--}}
-{{--                            <a x-on:click="$dispatch('open-side-modal2', { componentName: 'scheduling.catalog.components.form-product', params: {idProduct: null, idDelete: {{$product->id}} }, events:[] })"--}}
-{{--                               class="w-full md:w-20 text-center cursor-pointer block px-2 py-1 text-xs bg-red-500 text-white rounded hover:bg-opacity-50 font-bold">Apagar</a>--}}
-{{--                        </td>--}}
-{{--                    </tr>--}}
-{{--                @endforeach--}}
+                @foreach($procedures as $procedure)
+                    <tr class="even:bg-gray-100 p-2">
+                        <td class="text-left p-2 pl-4">{{$procedure->id}}</td>
+                        <td class="text-center p-2 pl-4">{{$procedure->name}}</td>
+                        <td class="text-center p-2 pl-4">{{$procedure->description}}</td>
+                        <td class="text-center p-2 pl-4">R$ {{ number_format($procedure->price, 2,  ',' , '.') }}</td>
+                        <td class="text-center p-2 pl-4">{{$procedure->duration}}h</td>
+                        <td class="text-center p-2 pl-4">{{$procedure->category->name ?? 'Sem Categoria'}}</td>
+                        <td class="text-center p-2 flex flex-row gap-2 justify-center">
+                            <a x-on:click="$dispatch('open-side-modal', { componentName: 'scheduling.catalog.components.procedure.form-procedure', params: {'idProcedure': {{$procedure->id}}}, events:[] })"
+                               class="w-full md:w-20 text-center cursor-pointer block px-2 py-1 text-xs bg-blue-black text-white rounded hover:bg-opacity-50 font-bold">Editar</a>
+                            <a x-on:click="$dispatch('open-side-modal2', { componentName: 'scheduling.catalog.components.procedure.form-procedure', params: {idProcedure: null, idDelete: {{$procedure->id}} }, events:[] })"
+                               class="w-full md:w-20 text-center cursor-pointer block px-2 py-1 text-xs bg-red-500 text-white rounded hover:bg-opacity-50 font-bold">Apagar</a>
+                        </td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>
