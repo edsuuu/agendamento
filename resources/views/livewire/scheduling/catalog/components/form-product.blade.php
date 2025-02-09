@@ -1,5 +1,4 @@
 <div>
-
     <div class="flex justify-between w-full mb-4">
         <div>
             @if ($idDelete)
@@ -9,7 +8,6 @@
             @endif
         </div>
     </div>
-
 
     <div class="bg-white p-4 rounded-lg shadow-lg">
         @if(!$idDelete)

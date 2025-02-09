@@ -41,12 +41,13 @@ class FormProduct extends Component
     public function save(): void
     {
         $validate = $this->validate([
-            'name' => 'required',
+            'name' => 'required|unique:products,name',
             'price' => 'required',
             'quantity' => 'required:min:0',
             'categorySelect' => 'sometimes|nullable',
         ], [
-            'required' => 'O campo :attribute é obrigatorio.',
+            'required' => 'O campo :attribute é obrigatório.',
+            'unique' => 'Já existe um produto com esse :attribute.',
         ], [
             'name' => 'Nome',
             'price' => 'Preço',

@@ -14,13 +14,32 @@
     </div>
 
     <div>
-        <div class="text-black flex flex-col gap-0.5 mt-2 w-[300px]">
-            <input type="search" name="search" placeholder="Nome da categoria"
-                   wire:model.change.blur="searchProduct"
-                   class="border border-gray-300 outline-none p-2 pl-3 rounded focus:border-blue-link"
-                   maxlength="20">
-        </div>
 
+        <div class="flex flex-row justify-between ">
+            <div class="flex flex-row gap-2">
+                <div class="text-black flex flex-col text-[13px] w-[300px]">
+                    <input type="search" name="search" placeholder="Nome da categoria"
+                           wire:model.change.blur="searchProduct"
+                           class="border border-gray-300 outline-none p-2 pl-3 rounded focus:border-blue-link"
+                           maxlength="20">
+                </div>
+
+                <div class="text-gray-500 text-[14px] flex flex-col w-[300px]">
+                    <select name="categories" id="categories"
+                            class="border border-gray-300 outline-none p-2 pl-3 rounded focus:border-blue-link "
+                            wire:model.change="filterByCategory">
+                        <option value="">Filtro por Categoria</option>
+                        @foreach($categories as $category)
+                            <option value="{{$category->id}}">{{$category->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button class="bg-gray-200 border text-sm border-gray-400 rounded px-3 active:scale-[0.99]" wire:click="clearFilters">Limpar filtros</button>
+            </div>
+        </div>
 
         <div class="shadow-lg sm:rounded-lg mt-5 bg-white">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500">

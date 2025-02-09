@@ -25,9 +25,10 @@ class FormCategory extends Component
     public function save()
     {
         $validate = $this->validate([
-            'name' => 'required',
+            'name' => 'required|unique:product_categories,name',
         ], [
             'required' => 'O campo :attribute é obrigatório',
+            'unique' => 'Já existe um produto com esse :attribute.',
         ], [
             'name' => 'Nome da categoria',
         ]);
