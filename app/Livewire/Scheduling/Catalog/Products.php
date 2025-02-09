@@ -17,56 +17,18 @@ class Products extends Component
     ];
 
     public $openModal = false, $openModalCategory = false, $viewCategory = false;
-    public $selectedProductForEdit, $selectedProductForDelete, $selectedCategoryForEdit, $selectedCategoryForDelete, $searchProduct;
-
-
-    #[On('closeModalProduct')]
-    public function openAndCloseModal($id = null, $deleteId = null)
-    {
-        if ($id != null) {
-            $this->selectedProductForEdit = $id;
-        }
-
-        if ($deleteId != null) {
-            $this->selectedProductForDelete = $deleteId;
-        }
-
-        $this->openModal = !$this->openModal;
-
-        if (!$this->openModal) {
-            $this->selectedProductForEdit = null;
-            $this->selectedProductForDelete = null;
-        }
-    }
-
-    #[On(['closeModalCategory', 'openModalCategory'])]
-    public function openAndCloseModalCategory($id = null, $deleteId = null):void
-    {
-        if ($id != null) {
-            $this->selectedCategoryForEdit = $id;
-        }
-
-        if ($deleteId != null) {
-            $this->selectedCategoryForDelete = $deleteId;
-        }
-
-        $this->openModalCategory = !$this->openModalCategory;
-
-        if (!$this->openModalCategory) {
-            $this->selectedCategoryForEdit = null;
-            $this->selectedCategoryForDelete = null;
-        }
-    }
-
-
-    public function viewCategoriesAndProducts(): void
-    {
-        $this->viewCategory = !$this->viewCategory;
-    }
+    public $searchProduct, $filterByCategory;
+    public $categories = [];
 
     public function mount()
     {
+        $this->categories = ProductCategory::query()->where('business_id', auth()->user()->business->id)->get();
+    }
 
+    public function clearFilters():void
+    {
+        $this->searchProduct = '';
+        $this->filterByCategory = '';
     }
 
     public function render()
@@ -79,6 +41,12 @@ class Products extends Component
         if ($this->searchProduct) {
             $productsQuery->where(function ($query) {
                 $query->where('name', 'LIKE', '%' . $this->searchProduct . '%');
+            });
+        }
+
+        if ($this->filterByCategory) {
+            $productsQuery->where(function ($query) {
+                $query->where('product_category_id', $this->filterByCategory);
             });
         }
 
