@@ -25,6 +25,9 @@ Route::prefix('auth')->group(function () {
 
         return redirect('/')->withCookie($cookie);
     })->name('logout');
+
+    Route::view('/forgot-password', 'scheduling.auth.forgot-password')->name('forgot-password')->middleware('guest');
+    Route::view('/reset-password/{token}', 'scheduling.auth.reset-password')->name('password.reset')->middleware('guest');
 });
 
 
