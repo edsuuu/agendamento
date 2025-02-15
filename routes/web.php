@@ -43,4 +43,5 @@ Route::middleware('auth')->group(function () {
     Route::view('scheduling', 'scheduling.scheduling')->name('scheduling');
     Route::view('products', 'scheduling.catalog.products')->name('products');
     Route::view('procedures', 'scheduling.catalog.procedures')->name('procedures');
+    Route::view('profile', 'scheduling.profile.profile')->name('profile');
 });

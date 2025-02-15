@@ -89,7 +89,7 @@
                         <div class="text-black flex flex-col gap-0.5">
                             <p class="text-gray-700 text-[14px] font-medium">CEP *</p>
 
-                            <input type="tel" id="phone" wire:model.blur="zipCode"
+                            <input type="text" id="phone" wire:model.blur="zipCode"
                                    class="border border-gray-300 outline-none p-2 pl-3 rounded focus:border-blue-link invalid:border-red-500 w-full"
                                    placeholder="99999-999" maxlength="9" x-mask="99999-999"/>
                             @error('zipCode')
