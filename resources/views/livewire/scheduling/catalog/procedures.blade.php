@@ -72,8 +72,8 @@
             </table>
         </div>
 
-        <div class="mt-2">
-{{--            {{ $products->links() }}--}}
+        <div class="mt-4">
+            {{ $procedures->links() }}
         </div>
 
     </div>
