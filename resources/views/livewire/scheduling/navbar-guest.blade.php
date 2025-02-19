@@ -18,7 +18,7 @@
             @else
                 <h1><a href="{{ route('complete-profile') }}">Complete seu Cadastro</a></h1>
             @endif
-            <a href="{{ route('logout') }}">Sair</a>
+            <a wire:click="logout">Sair</a>
         </div>
     @else
         <div class="flex flex-row gap-4 items-center">

@@ -64,7 +64,7 @@ class FormProcedure extends Component
                 'price' => (float)str_replace(',', '.', str_replace('.', '', $this->price)),
                 'description' => $this->description,
                 'duration' => $this->duration,
-                'procedure_category_id' => (int)$validate['categorySelect'] ?? null,
+                'procedure_category_id' => $validate['categorySelect'] ?? null,
             ]);
         } else {
             Procedures::create(
@@ -73,7 +73,7 @@ class FormProcedure extends Component
                     'price' => (float)str_replace(',', '.', str_replace('.', '', $validate['price'])),
                     'description' => $validate['description'],
                     'duration' => $validate['duration'],
-                    'procedure_category_id' => $validate['categorySelect'],
+                    'procedure_category_id' => $validate['categorySelect'] ?? null,
                     'business_id' => auth()->user()->business->id,
                 ]
             );

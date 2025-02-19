@@ -7,9 +7,12 @@ use App\Models\Procedures as ProceduresModel;
 use Carbon\Carbon;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\WithoutUrlPagination;
+use Livewire\WithPagination;
 
 class Procedures extends Component
 {
+    use WithPagination, WithoutUrlPagination;
     protected $listeners = [
         'refreshNewProcedure' => '$refresh',
     ];
@@ -26,7 +29,12 @@ class Procedures extends Component
     public function refreshCategory()
     {
         $this->categories = ProcedureCategory::query()->where('business_id', auth()->user()->business->id)->get();
+    }
 
+    public function clearFilters():void
+    {
+        $this->searchProcedures = '';
+        $this->filterByCategory = '';
     }
 
     public function render()
