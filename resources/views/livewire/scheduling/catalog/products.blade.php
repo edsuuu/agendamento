@@ -3,18 +3,12 @@
         <h1 class="text-2xl font-bold">Produtos</h1>
 
         <div class="flex flex-row gap-4 items-center">
-            <a x-on:click="$dispatch('open-side-modal', { componentName: 'scheduling.catalog.components.product.table-category', params: {}, events:[] })"
-               class="w-full md:w-32 text-center cursor-pointer block px-2 py-1 text-xs bg-blue-black text-white rounded hover:bg-opacity-50 font-bold active:scale-[0.99]">Ver
-                Categorias</a>
-            <a x-on:click="$dispatch('open-side-modal', { componentName: 'scheduling.catalog.components.product.form-product', params: {}, events:[] })"
-               class="w-full md:w-32 text-center cursor-pointer block px-2 py-1 text-xs bg-blue-black text-white rounded hover:bg-opacity-50 font-bold active:scale-[0.99]">Criar
-                Produto</a>
+            <livewire:components.button-modal text="Ver Categorias" component="scheduling.catalog.components.product.table-category" class-list="w-full md:w-32 text-center cursor-pointer block px-2 py-1 text-xs bg-blue-black text-white rounded hover:bg-opacity-50 font-bold active:scale-[0.99]"/>
+            <livewire:components.button-modal text="Criar Produto" component="scheduling.catalog.components.product.form-product" class-list="w-full md:w-32 text-center cursor-pointer block px-2 py-1 text-xs bg-blue-black text-white rounded hover:bg-opacity-50 font-bold active:scale-[0.99]"/>
         </div>
-
     </div>
 
     <div>
-
         <div class="flex flex-row justify-between ">
             <div class="flex flex-row gap-2">
                 <div class="text-black flex flex-col text-[13px] w-[300px]">
@@ -70,12 +64,8 @@
                 </tbody>
             </table>
         </div>
-
         <div class="mt-2">
             {{ $products->links() }}
         </div>
-
     </div>
-
-
 </div>

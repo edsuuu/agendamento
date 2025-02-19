@@ -14,7 +14,9 @@
             <span class="text-red-500 text-[13px]">{{ $message }}</span>
             @enderror
         </div>
+    </div>
 
+    <div>
         <div class="text-black flex flex-col gap-0.5">
             <p class="text-gray-700 text-[14px] font-medium">Senha Atual</p>
             <input type="text" name="name" placeholder="Nome da nova categoria"

@@ -12,8 +12,6 @@ class ForgotPassword extends Component
 
     public function send()
     {
-
-
         $this->validate([
             'email' => 'required',
         ], [
@@ -21,7 +19,6 @@ class ForgotPassword extends Component
         ], [
             'email' => 'E-mail',
         ]);
-
 
         $user = User::where('email', $this->email)->first();
 
@@ -31,9 +28,11 @@ class ForgotPassword extends Component
 
         $status = Password::sendResetLink(['email' => $this->email]);
 
-        if($status === Password::RESET_LINK_SENT){
+        if ($status === Password::RESET_LINK_SENT) {
             session()->flash('success', 'Email enviado com sucesso. Verifique sua caixa de entrada!');
             return redirect(route('login'));
+        } elseif ($status === Password::RESET_THROTTLED) {
+            return $this->addError('email', 'Você fez muitas tentativas. Tente novamente em daqui alguns minutos.');
         } else {
             return $this->addError('email', 'Ocorreu algum erro ao enviar o email. Tente novamente mais tarde.');
         }
