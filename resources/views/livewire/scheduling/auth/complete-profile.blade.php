@@ -290,10 +290,3 @@
         @endif
     </div>
 </div>
-
-<script>
-    function maskPhone(value) {
-        return value.replace(/[^0-9]/g, '').length > 10 ? '(99) 99999-9999' : '(99) 9999-9999';
-    }
-
-</script>

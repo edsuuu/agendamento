@@ -1,3 +1,3 @@
 <x-app-layout>
-    <livewire:scheduling.profile.edit-profile />
+    <livewire:scheduling.profile.profile />
 </x-app-layout>
