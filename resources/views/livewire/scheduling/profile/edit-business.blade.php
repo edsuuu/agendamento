@@ -129,7 +129,7 @@
         <div class="mt-4 flex flex-row gap-5 items-center">
             <button type="submit" class="bg-blue-black text-white px-4 py-1 rounded-lg active:scale-[0.99]]">Salvar</button>
             <div x-data="{ shown: false, timeout: null }"
-                 x-init="@this.on('successUpdatePassword', () => { clearTimeout(timeout); shown = true; timeout = setTimeout(() => { shown = false }, 2000); })"
+                 x-init="@this.on('successUpdateBusiness', () => { clearTimeout(timeout); shown = true; timeout = setTimeout(() => { shown = false }, 2000); })"
                  x-show.transition.out.opacity.duration.1500ms="shown"
                  x-transition:leave.opacity.duration.1500ms
                  style="display: none;" class="text-sm text-green-600">

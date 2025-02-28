@@ -24,7 +24,8 @@ class Business extends Model implements Auditable
         'zip',
         'photo',
         'referral_source',
-        'neighborhood'
+        'neighborhood',
+        'document_type',
     ];
 
     public function user(): BelongsTo
