@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('business', function (Blueprint $table) {
-            $table->string('slug')->nullable()->unique()->after('segment_id');
+        Schema::create('personalizate_business', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->nullable();
 
+            $table->timestamps();
         });
     }
 
@@ -22,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('business', function (Blueprint $table) {
-            $table->dropColumn('slug');
-        });
+        Schema::dropIfExists('personalizate_business');
     }
 };
