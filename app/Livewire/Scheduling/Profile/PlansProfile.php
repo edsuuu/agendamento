@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Livewire\Scheduling;
+namespace App\Livewire\Scheduling\Profile;
 
 use App\Models\Plans;
 use Livewire\Component;
 
-class HomePage extends Component
+class PlansProfile extends Component
 {
     public $plans = [];
+
     public function mount()
     {
         $this->plans = Plans::all();
@@ -15,6 +16,6 @@ class HomePage extends Component
 
     public function render()
     {
-        return view('livewire.scheduling.home-page');
+        return view('livewire.scheduling.profile.plans-profile');
     }
 }
